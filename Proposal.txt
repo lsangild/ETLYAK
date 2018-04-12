@@ -1,0 +1,14 @@
+Model af højttaler
+    - Volumen
+    - Form
+    - Antal enheder
+    - Størrelse af enheder
+    - Delefilter
+
+Sammenlign med kendt højttaler
+    - Måling
+    - Simulering
+
+Evt. optimer højttaler
+
+Evt. byg optimeret højttaler
