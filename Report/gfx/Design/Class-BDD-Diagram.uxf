@@ -19,7 +19,7 @@ Digital in</panel_attributes>
       <x>120</x>
       <y>70</y>
       <w>280</w>
-      <h>200</h>
+      <h>230</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 CrossoverFilter
@@ -34,7 +34,7 @@ CrossoverFilter
 + setBehaviour(f0, order, type) : void
 + plotResponse() : void
 + transform(x) : double
-</panel_attributes>
++ printComponents() : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -122,8 +122,8 @@ Digital out</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>600</y>
+      <x>680</x>
+      <y>520</y>
       <w>360</w>
       <h>120</h>
     </coordinates>
