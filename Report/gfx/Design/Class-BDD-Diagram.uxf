@@ -4,106 +4,154 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>0</x>
-      <y>260</y>
-      <w>190</w>
+      <x>10</x>
+      <y>140</y>
+      <w>130</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
-Digital input signal</panel_attributes>
-    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+Digital in</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>190</y>
-      <w>140</w>
-      <h>190</h>
+      <x>120</x>
+      <y>70</y>
+      <w>280</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 CrossoverFilter
 --
-+ 
-+ transform(x)
+- f0 : double
+- order : double
+- type : string
+- b : double
+- a : double
 --
-- 
-
++ bool PassThrough : void
++ setBehaviour(f0, order, type) : void
++ plotResponse() : void
++ transform(x) : double
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
-      <y>190</y>
-      <w>130</w>
-      <h>190</h>
+      <x>560</x>
+      <y>80</y>
+      <w>210</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 DriveUnit
 --
-+ 
-+ transform(x)
+- Qts : double
+- Bl : double
+- Rms : double
+- Mms : double
+- Cms : double
+- Sd : double
+- RDC : double
+- Rnom : double
 --
-- 
-
-</panel_attributes>
++ setParameters( ) : void
++ plotResponse() : void
++ transform(x) : double</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>190</y>
-      <w>120</w>
+      <x>120</x>
+      <y>360</y>
+      <w>360</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Cabinet
 --
-+ 
-+ transform(x)
+- Vb
+- dim[height, width, depth] : double
+- bassReflex[] : BassReflex
 --
-- 
-
-</panel_attributes>
++ plotResponse() : void
++ transform(x) : double
++ addBassReflex(circumference, depth, location)
++ addBassReflex(BassReflex)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>270</y>
-      <w>200</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=-&gt;&gt;
-Transformed signal</panel_attributes>
-    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>600</x>
-      <y>270</y>
-      <w>180</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=-&gt;&gt;
-Transformed signal</panel_attributes>
-    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>870</x>
-      <y>260</y>
+      <x>390</x>
+      <y>150</y>
       <w>190</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;
-Digital output signal</panel_attributes>
+Transformed signal</panel_attributes>
     <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>90</x>
+      <y>160</y>
+      <w>720</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+Transformed signal</panel_attributes>
+    <additional_attributes>680.0;10.0;700.0;10.0;700.0;180.0;10.0;180.0;10.0;310.0;30.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>460</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+Digital out</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>600</y>
+      <w>360</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+BassReflex
+--
++ circumference : double
++ depth : double
++ location : string
++ setup(circumference, depth, location) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>310</y>
+      <w>190</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+Speaker
+--
++ filter : CrossoverFilter
++ driver : DriveUnit
++ cabinet : Cabinet
++ plotResponse() : void
++ transform() : double</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
