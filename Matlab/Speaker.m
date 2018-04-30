@@ -7,5 +7,7 @@ classdef Speaker < TransferFunctions
   methods
     function y = transform(x)
     end
+    function plotResponse()
+    end
   end
 end

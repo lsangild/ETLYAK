@@ -9,5 +9,8 @@ classdef Cabinet < TransferFunctions
       test;
     end
     function addBassReflex(circumference, depth, location)
+    end
+    function plotResponse()
+    end
   end
 end
