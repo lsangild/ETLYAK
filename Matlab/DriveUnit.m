@@ -4,7 +4,9 @@ classdef DriveUnit < TransferFunctions
     rho     = 1.1839;
     pref    = 20e-6;
     rf      = 1;
-    
+  end
+  properties (Access = public)
+    % Data sheet values
     fs
     Qts
     Bl
@@ -12,14 +14,18 @@ classdef DriveUnit < TransferFunctions
     Mms
     Cms
     Sd
-    RE
+    Re
     Rnom
+    
+    % Derived values
+    UG
   end
   
   methods (Access = protected)
       function L = transform(obj, f)
-          %   (rho*Sd*Bl*UG)/(2*pi*Mms*RE)
-          A = (obj.rho * obj.Sd * obj.Bl * obj.UG) / (2 * pi * obj.Mms * obj.RE);
+          setDerivedParameters(obj);
+          %   (rho*Sd*Bl*UG)/(2*pi*Mms*Re)
+          A = (obj.rho * obj.Sd * obj.Bl * obj.UG) / (2 * pi * obj.Mms * obj.Re);
           wS = 2 * pi * obj.fs;
           s = 1i .* 2 .* pi .* f;
           AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s+ wS^2));
@@ -28,7 +34,7 @@ classdef DriveUnit < TransferFunctions
   end
   
   methods (Access = public)
-      function setParameters(obj, Qts, Bl, Rms, Mms, Cms, Sd, RE, Rnom, fs)
+      function setParameters(obj, Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fs)
           if (Qts > 0) && (Qts < 1)
               obj.Qts = Qts;
           else 
@@ -45,14 +51,14 @@ classdef DriveUnit < TransferFunctions
           obj.Rms = Rms;
           obj.Mms = Mms;
           obj.Cms = Cms;
-          obj.RE = RE;
+          obj.Re = Re;
           obj.Rnom = Rnom;
           obj.fs = fs;
+          setDerivedParameters(obj);
       end
       
-      function setDerivedParameters(obj, P)
-          obj.P = P;
-          obj.UG = sqrt(P*obj.Rnom);
+      function setDerivedParameters(obj)
+          obj.UG = sqrt(1*obj.Rnom);
       end
       
       function setConstants(obj, rho, pref, rF)

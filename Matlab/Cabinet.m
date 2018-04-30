@@ -1,5 +1,5 @@
-classdef Cabinet% < TransferFunctions
-  properties (Access = private)
+classdef Cabinet < TransferFunctions
+  properties (Access = public)
     %% Defaults
     % Speed of sound (m/s) (default for 25 °C)
     c = 346.13;
@@ -32,7 +32,7 @@ classdef Cabinet% < TransferFunctions
   methods (Access = protected)
   % Returns the sound pressure  in dB SPL
     function L = transform(obj, f)
-        setDerivedParameters();
+        setDerivedParameters(obj);
         s = 1i .* 2 .* pi .* f;
         qF = obj.FA ./ (obj.RAE + s .* obj.MAS + 1 ./ (s .* obj.CAS) + obj.RAS + 1 .* (s .* obj.CAB));
         pF = obj.rho .* s .* qF ./ (2 * pi * R);
@@ -41,12 +41,12 @@ classdef Cabinet% < TransferFunctions
     
     % Sets the derived parameters dependent on the given Drive Unit
     function setDerivedParameters(obj)
-      obj.FA  = (obj.driveUnit.BL * obj.driveUnit.UG / (obj.driveUnit.RE * obj.driveUnit.SD));
+      obj.FA  = (obj.driveUnit.Bl * obj.driveUnit.UG / (obj.driveUnit.Re * obj.driveUnit.Sd));
       obj.CAB = obj.volume / (obj.rho * obj.c.^2);
-      obj.RAE = obj.driveUnit.BL.^2 / (obj.driveUnit.RE * obj.driveUnit.SD.^2);
-      obj.MAS = obj.driveUnit.MMS / (obj.driveUnit.SD.^2);
-      obj.CAS = obj.driveUnit.CMS * (obj.driveUnit.SD.^2);
-      obj.RAS = obj.driveUnit.RMS / (obj.driveUnit.SD.^2);
+      obj.RAE = obj.driveUnit.Bl.^2 / (obj.driveUnit.Re * obj.driveUnit.Sd.^2);
+      obj.MAS = obj.driveUnit.Mms / (obj.driveUnit.Sd.^2);
+      obj.CAS = obj.driveUnit.Cms * (obj.driveUnit.Sd.^2);
+      obj.RAS = obj.driveUnit.Rms / (obj.driveUnit.Sd.^2);
     end
   end
   

@@ -7,7 +7,7 @@ classdef CrossoverFilter < TransferFunctions
         a
     end
     methods
-        function PassThrough()
+        function passThrough()
         end
         function setBehaviour(f0, order, type)
             obj.f0 = f0;
