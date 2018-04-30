@@ -1,12 +1,15 @@
 classdef DriveUnit < TransferFunctions
   properties (Access = private)
-    % Defaults
+    %% Defaults
+    % Density of air (kg/m^3)
     rho     = 1.1839;
+    % Reference sound pressure (Pa)
     pref    = 20e-6;
+    % Distance to microphone (m)
     rf      = 1;
   end
   properties (Access = public)
-    % Data sheet values
+    %% Data sheet values
     fs
     Qts
     Bl
@@ -16,25 +19,42 @@ classdef DriveUnit < TransferFunctions
     Sd
     Re
     Rnom
-    
-    % Derived values
+    %% Derived values
     UG
   end
   
   methods (Access = protected)
       function L = transform(obj, f)
+          % TRANSFORM Create the transfer function for a drive unit
+          % mounted in a infinite (open) baffle.
+          %
+          % L = TRANSFORM(f) Returns the sound pressure in dB SPL.
           setDerivedParameters(obj);
-          %   (rho*Sd*Bl*UG)/(2*pi*Mms*Re)
+          % p = rho*Sd*Bl*UG/2*pi*Mms*Re
           A = (obj.rho * obj.Sd * obj.Bl * obj.UG) / (2 * pi * obj.Mms * obj.Re);
           wS = 2 * pi * obj.fs;
           s = 1i .* 2 .* pi .* f;
-          AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s+ wS^2));
+          AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
           L = 20*log10(abs((A / obj.rf) .* AL ./ obj.pref));
       end
   end
   
   methods (Access = public)
       function setParameters(obj, Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fs)
+          % SETPARAMETERS Sets the parameters for the drive unit.
+          % The parameters should be found in the datasheet for the 
+          % given drive unit. 
+          %
+          % SETPARAMETERS(Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fs)
+          % Qts  Total Q of the drive unit [0.0 < Qts < 1.0]
+          % Bl   Product of magnet field strength and length of wire in the magnetic field (Tm)
+          % Rms  Mechanical resistance of the drive unit's suspension (Ns/m)
+          % Mms  Mass of the diaphragm/coil (kg)
+          % Cms  Compliance of the drive unit's suspension (m/N)
+          % Sd   Effective surface area of driver diaphragm (cm^2) [1.0 < Sd < 1000.0]
+          % Re   DC resistance of the voice coil (ohm)
+          % Rnom Nominel resistance of drive unit (ohm)
+          % fs   Resonance frequency of the drive unit (Hz)
           if (Qts > 0) && (Qts < 1)
               obj.Qts = Qts;
           else 
@@ -46,7 +66,6 @@ classdef DriveUnit < TransferFunctions
           else
               warning('Sd is specified in cm^2')
           end
-          
           obj.Bl = Bl;
           obj.Rms = Rms;
           obj.Mms = Mms;
@@ -56,12 +75,21 @@ classdef DriveUnit < TransferFunctions
           obj.fs = fs;
           setDerivedParameters(obj);
       end
-      
       function setDerivedParameters(obj)
+          % SETDERIVEDPARAMETERS Sets the derived parameters 
+          % dependent on the given drive unit.
+          %
+          % UG Voltage for 1 W electric power in nominel 8 ohm
           obj.UG = sqrt(1*obj.Rnom);
       end
-      
-      function setConstants(obj, rho, pref, rF)
+      function setConstants(obj, rho, pref, rf)
+        % SETCONSTANTS Change default values of rho, pref and rf.
+        %
+        % SETCONSTANTS(rho, pref, rf)
+        % rho  Density of air (kg/m^3)
+        % pref Reference sound pressure (Pa)
+        % rf   Distance to microphone (m)
+   
         % Check for correct number of input arguments
         if ~(any([1, 5] == nargin))
           error(' Call setConsants(c, rho, r, pRef) with 4 parameters or\n%s',...
