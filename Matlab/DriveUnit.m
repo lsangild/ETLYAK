@@ -29,7 +29,7 @@ classdef DriveUnit < TransferFunctions
           wS = 2 * pi * obj.fs;
           s = 1i .* 2 .* pi .* f;
           AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s+ wS^2));
-          L = 20*log10(abs((A / obj.rF) .* AL ./ obj.pref));
+          L = 20*log10(abs((A / obj.rf) .* AL ./ obj.pref));
       end
   end
   

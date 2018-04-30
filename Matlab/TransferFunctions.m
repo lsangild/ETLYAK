@@ -1,4 +1,4 @@
-classdef TransferFunctions
+classdef TransferFunctions < matlab.mixin.SetGet
   properties (Access = protected)
     a
     b
@@ -18,7 +18,7 @@ classdef TransferFunctions
       L = transform(obj, f);
       
       figure
-      semilogx(L, f);
+      semilogx(f, L);
       grid on
       xlabel('Frequency / Hz');
       ylabel('Amplitude / dB_{SPL}');
