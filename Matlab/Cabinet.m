@@ -1,11 +1,19 @@
-classdef Cabinet < TransferFunctions
+classdef Cabinet% < TransferFunctions
   properties (Access = private)
-    % Ambience (default for 25 °C)
+    %% Defaults
+    % Speed of sound (m/s) (default for 25 °C)
     c = 346.13;
+    % Density of air (kg/m^3) (default for 25 °C)
     rho = 1.1839;
+    % Distance to microphone (m)
+    R = 1
+    % Reference sound pressure (Pa)
+    pRef = 20e-6;
     
-    % Box parameters
+    %% Box parameters
+    % Box volume (L)
     volume
+    % Any bass reflexes
     bassReflex
     
     % Drive unit
@@ -23,8 +31,12 @@ classdef Cabinet < TransferFunctions
   
   methods (Access = protected)
   % Returns the sound pressure  in dB SPL
-    function y = transform(x)
+    function L = transform(f)
         setDerivedParameters();
+        s = 1i .* 2 .* pi .* f;
+        qF = obj.FA ./ (obj.RAE + s .* obj.MAS + 1 ./ (s .* obj.CAS) + obj.RAS + 1 .* (s .* obj.CAB));
+        pF = obj.rho .* s .* qF ./ (2 * pi * R);
+        L = 20 .* log10(abs(pF) ./ pREF);
     end
     
     % Sets the derived parameters dependent on the given Drive Unit
@@ -45,19 +57,46 @@ classdef Cabinet < TransferFunctions
     end
     
     % Setting the drive unit
-    function setDriveUnit(DU)
-      obj.DU = DU;
+    function setDriveUnit(driveUnit)
+      obj.driveUnit = driveUnit;
     end
     
-    function setAmbience(c, rho);
-      obj.c = c;
-      obj.rho = rho;
+    function setConstants(c, rho, R, pRef);
+      % Check for correct number of input arguments
+      if !any([1, 5] == nargin)
+        error(' Call setConsants(c, rho, r, pRef) with 4 parameters or\n%s',...
+        'with 0, setConstants(), to reset to default.');
+      end
+      
+      if nargin == 1
+        obj.c = 346.13;
+        obj.rho = 1.1839;
+        obj.R = 1;
+        obj.pRef = 20e-6;
+      else
+        obj.c = c;
+        obj.rho = rho;
+        obj.R = R;
+        obj.pRef = pRef;
+      end
     end
     
     function setBassReflex(circumference, depth)
     end
   
-    function plotResponse()
+    function plotResponse(f)
+      if nargin == 1
+        f = logspace(2, 4, 100);
+      elseif nargin > 2
+        error('Supply a list of frequencies to plot or none to plot from 100 Hz to 10000 Hz');
+      end
+      L = transform(f);
+      
+      figure
+      semilogx(L, f);
+      grid on
+      xlabel('Frequency / Hz');
+      ylabel('Amplitude / dB_{SPL}');
     end
   end
 end
