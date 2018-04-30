@@ -31,7 +31,7 @@ classdef Cabinet% < TransferFunctions
   
   methods (Access = protected)
   % Returns the sound pressure  in dB SPL
-    function L = transform(f)
+    function L = transform(obj, f)
         setDerivedParameters();
         s = 1i .* 2 .* pi .* f;
         qF = obj.FA ./ (obj.RAE + s .* obj.MAS + 1 ./ (s .* obj.CAS) + obj.RAS + 1 .* (s .* obj.CAB));
@@ -40,7 +40,7 @@ classdef Cabinet% < TransferFunctions
     end
     
     % Sets the derived parameters dependent on the given Drive Unit
-    function setDerivedParameters()
+    function setDerivedParameters(obj)
       obj.FA  = (obj.driveUnit.BL * obj.driveUnit.UG / (obj.driveUnit.RE * obj.driveUnit.SD));
       obj.CAB = obj.volume / (obj.rho * obj.c.^2);
       obj.RAE = obj.driveUnit.BL.^2 / (obj.driveUnit.RE * obj.driveUnit.SD.^2);
@@ -63,11 +63,11 @@ classdef Cabinet% < TransferFunctions
     end
     
     % Setting the drive unit
-    function setDriveUnit(driveUnit)
+    function setDriveUnit(obj, driveUnit)
       obj.driveUnit = driveUnit;
     end
     
-    function setConstants(c, rho, R, pRef);
+    function setConstants(obj, c, rho, R, pRef);
       % Check for correct number of input arguments
       if ~any([1, 5] == nargin)
         error(' Call setConsants(c, rho, r, pRef) with 4 parameters or\n%s',...
