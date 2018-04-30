@@ -53,7 +53,13 @@ classdef Cabinet% < TransferFunctions
   methods (Access = public)
     % Constructor
     function obj = Cabinet(volume)
-      obj.volume = volume;
+      try
+        narginchk(1, 1);
+        obj.volume = volume;
+      catch
+        warning('Cabinet created without volume. Volume set to 1.');
+        obj.volume = 1;
+      end
     end
     
     % Setting the drive unit
@@ -63,7 +69,7 @@ classdef Cabinet% < TransferFunctions
     
     function setConstants(c, rho, R, pRef);
       % Check for correct number of input arguments
-      if !any([1, 5] == nargin)
+      if ~any([1, 5] == nargin)
         error(' Call setConsants(c, rho, r, pRef) with 4 parameters or\n%s',...
         'with 0, setConstants(), to reset to default.');
       end
