@@ -4,7 +4,7 @@ classdef DriveUnit < TransferFunctions
     % Density of air (kg/m^3)
     rho     = 1.1839;
     % Reference sound pressure (Pa)
-    pref    = 20e-6;
+    pRef    = 20e-6;
     % Distance to microphone (m)
     rf      = 1;
   end
@@ -35,7 +35,7 @@ classdef DriveUnit < TransferFunctions
           wS = 2 * pi * obj.fs;
           s = 1i .* 2 .* pi .* f;
           AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
-          L = 20*log10(abs((A / obj.rf) .* AL ./ obj.pref));
+          L = 20*log10(abs((A / obj.rf) .* AL ./ obj.pRef));
       end
   end
   
@@ -82,12 +82,12 @@ classdef DriveUnit < TransferFunctions
           % UG Voltage for 1 W electric power in nominel 8 ohm
           obj.UG = sqrt(1*obj.Rnom);
       end
-      function setConstants(obj, rho, pref, rf)
-        % SETCONSTANTS Change default values of rho, pref and rf.
+      function setConstants(obj, rho, pRef, rf)
+        % SETCONSTANTS Change default values of rho, pRef and rf.
         %
-        % SETCONSTANTS(rho, pref, rf)
+        % SETCONSTANTS(rho, pRef, rf)
         % rho  Density of air (kg/m^3)
-        % pref Reference sound pressure (Pa)
+        % pRef Reference sound pressure (Pa)
         % rf   Distance to microphone (m)
    
         % Check for correct number of input arguments
@@ -97,11 +97,11 @@ classdef DriveUnit < TransferFunctions
         end
         if nargin == 1
           obj.rho = 1.1839;
-          obj.pref = 20e-6;
+          obj.pRef = 20e-6;
           obj.rF = 1;
         else
           obj.rho = rho;
-          obj.pref = pref;
+          obj.pRef = pRef;
           obj.rF = rF;
         end
       end
