@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>180</y>
+      <w>280</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+CrossoverFilter
+--
+- f0 : double
+- order : double
+- type : string
+- b : double
+- a : double
++ passThrough : bool
+--
++ setBehaviour(f0, order, type) : void
++ transform(x) : double
++ printComponents() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>180</y>
+      <w>180</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+DriveUnit
+--
+- Qts : double
+- Bl : double
+- Rms : double
+- Mms : double
+- Cms : double
+- Sd : double
+- RDC : double
+- Rnom : double
+--
++ transform(x) : double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>180</y>
+      <w>360</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+Cabinet
+--
+- Vb
+- dim[height, width, depth] : double
+- bassReflex[] : BassReflex
+--
++ transform(x) : double
++ addBassReflex(circumference, depth, location)
++ addBassReflex(BassReflex)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>30</y>
+      <w>340</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+BassReflex
+--
++ circumference : double
++ depth : double
++ location : double array
+--
++ setup(circumference, depth, location) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>180</y>
+      <w>190</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+Speaker
+--
++ filter : CrossoverFilter
++ driver : DriveUnit
++ cabinet : Cabinet
+--
++ transform(x) : double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>30</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+TransferFunction
+--
++ plotResponse() : void
+/+ transform(x) : double/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>100</y>
+      <w>450</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>430.0;10.0;430.0;60.0;10.0;60.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>150</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>150</y>
+      <w>410</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>390.0;30.0;390.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>150</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+</diagram>
