@@ -8,7 +8,7 @@ classdef Cabinet < TransferFunctions
     % Distance to microphone (m)
     R = 1
     % Reference sound pressure (Pa)
-    pRef = 20e-6;
+    %pRef = 20e-6;
     
     %% Box parameters
     % Box volume (L)
@@ -29,7 +29,7 @@ classdef Cabinet < TransferFunctions
     RAL
   end
   
-  methods (Access = protected)
+  methods (Access = public)
   % Returns the sound pressure  in dB SPL
     function pF = transform(obj, f)
         setDerivedParameters(obj);

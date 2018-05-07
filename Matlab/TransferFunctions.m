@@ -5,7 +5,7 @@ classdef TransferFunctions < matlab.mixin.SetGet
     pRef = 20e-6;
   end
   
-  methods (Abstract, Access = protected)
+  methods (Abstract, Access = public)
     L = transform(obj, f)
   end
   

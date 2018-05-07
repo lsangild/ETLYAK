@@ -3,21 +3,21 @@ classdef CrossoverFilter < TransferFunctions
         f0
         order
         type
-        pRef = 20e-6;
+        %pRef = 20e-6;
     end
-    methods (Access = protected)
+    methods (Access = public)
         function passThrough()
         end
         
-        function L = transform(obj, f)
+        function A = transform(obj, f)
             s = 1i * 2 * pi .* f;
             switch obj.type
                 case 'low'
-                    lp = 1 ./ (1 + s / (2 * pi * obj.f0));
-                    L = 20 .* log10(abs(lp) ./ obj.pRef);
+                    A = 1 ./ (1 + s / (2 * pi * obj.f0));
+                    %L = 20 .* log10(abs(lp) ./ obj.pRef);
                 case 'high'
-                    hp = (s / (2 * pi * obj.f0)) ./ (1 + (s / (2 * pi * obj.f0)));
-                    L = 20 .* log10(abs(hp) ./ obj.pRef);
+                    A = (s / (2 * pi * obj.f0)) ./ (1 + (s / (2 * pi * obj.f0)));
+                    %L = 20 .* log10(abs(hp) ./ obj.pRef);
                 otherwise
                     warning('Type must either be "high" or "low"');
             end

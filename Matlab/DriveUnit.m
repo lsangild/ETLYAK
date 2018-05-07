@@ -4,9 +4,9 @@ classdef DriveUnit < TransferFunctions
     % Density of air (kg/m^3)
     rho     = 1.1839;
     % Reference sound pressure (Pa)
-    pRef    = 20e-6;
+    %pRef    = 20e-6;
     % Distance to microphone (m)
-    rf      = 1;
+    rF      = 1;
   end
   properties (Access = public)
     %% Data sheet values
@@ -23,7 +23,7 @@ classdef DriveUnit < TransferFunctions
     UG
   end
   
-  methods (Access = protected)
+  methods (Access = public)
       function p = transform(obj, f)
           % TRANSFORM Create the transfer function for a drive unit
           % mounted in a infinite (open) baffle.
@@ -31,11 +31,12 @@ classdef DriveUnit < TransferFunctions
           % L = TRANSFORM(f) Returns the sound pressure in dB SPL.
           setDerivedParameters(obj);
           % p = rho*Sd*Bl*UG/2*pi*Mms*Re
+          %%%%%% EVT. RET TIL BUNDEN AF SIDE 51
           A = (obj.rho * obj.Sd * obj.Bl * obj.UG) / (2 * pi * obj.Mms * obj.Re);
           wS = 2 * pi * obj.fs;
           s = 1i .* 2 .* pi .* f;
           AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
-          p = (A/obj.rf) .* AL;
+          p = (A/obj.rF) .* AL;
       end
   end
   
@@ -82,7 +83,7 @@ classdef DriveUnit < TransferFunctions
           % UG Voltage for 1 W electric power in nominel 8 ohm
           obj.UG = sqrt(1*obj.Rnom);
       end
-      function setConstants(obj, rho, pRef, rf)
+      function setConstants(obj, rho, pRef, rF)
         % SETCONSTANTS Change default values of rho, pRef and rf.
         %
         % SETCONSTANTS(rho, pRef, rf)
