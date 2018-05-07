@@ -154,6 +154,7 @@ DriveUnit
 Cabinet
 --
 - Vb
+- 
 - dim[height, width, depth] : double
 - bassReflex[] : BassReflex
 --
