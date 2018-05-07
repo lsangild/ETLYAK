@@ -24,7 +24,7 @@ classdef DriveUnit < TransferFunctions
   end
   
   methods (Access = protected)
-      function L = transform(obj, f)
+      function p = transform(obj, f)
           % TRANSFORM Create the transfer function for a drive unit
           % mounted in a infinite (open) baffle.
           %
@@ -35,7 +35,7 @@ classdef DriveUnit < TransferFunctions
           wS = 2 * pi * obj.fs;
           s = 1i .* 2 .* pi .* f;
           AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
-          L = 20*log10(abs((A / obj.rf) .* AL ./ obj.pRef));
+          p = (A/obj.rf) .* AL;
       end
   end
   
