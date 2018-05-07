@@ -16,7 +16,7 @@ classdef CrossoverFilter < TransferFunctions
                     lp = 1 ./ (1 + s / (2 * pi * obj.f0));
                     L = 20 .* log10(abs(lp) ./ obj.pRef);
                 case 'high'
-                    hp = (s ./ (2 * pi * obj.f0)) / (1 + (s ./ (2 * pi * obj.f0)));
+                    hp = (s / (2 * pi * obj.f0)) ./ (1 + (s / (2 * pi * obj.f0)));
                     L = 20 .* log10(abs(hp) ./ obj.pRef);
                 otherwise
                     warning('Type must either be "high" or "low"');
