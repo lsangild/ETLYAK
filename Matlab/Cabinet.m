@@ -31,12 +31,11 @@ classdef Cabinet < TransferFunctions
   
   methods (Access = protected)
   % Returns the sound pressure  in dB SPL
-    function L = transform(obj, f)
+    function pF = transform(obj, f)
         setDerivedParameters(obj);
         s = 1i .* 2 .* pi .* f;
         qF = obj.FA ./ (obj.RAE + s .* obj.MAS + 1 ./ (s .* obj.CAS) + obj.RAS + 1 .* (s .* obj.CAB));
         pF = obj.rho .* s .* qF ./ (2 * pi * obj.R);
-        L = 20 .* log10(abs(pF) ./ obj.pRef);
     end
     
     % Sets the derived parameters dependent on the given Drive Unit

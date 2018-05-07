@@ -2,6 +2,7 @@ classdef TransferFunctions < matlab.mixin.SetGet
   properties (Access = protected)
     a
     b
+    pRef = 20e-6;
   end
   
   methods (Abstract, Access = protected)
@@ -15,7 +16,8 @@ classdef TransferFunctions < matlab.mixin.SetGet
       elseif nargin >= 3
         error('Supply a list of frequencies to plot or none to plot from 100 Hz to 10000 Hz');
       end
-      L = transform(obj, f);
+      p = transform(obj, f);
+      L = 20 * log10(abs(p) ./ obj.pRef);
       
       figure
       semilogx(f, L);

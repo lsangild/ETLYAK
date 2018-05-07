@@ -1,13 +1,12 @@
 classdef Speaker < TransferFunctions
-  properties (Access = private)
+  properties (Access = public)
     filter
     driver
     cabinet
   end
   methods
-    function y = transform(x)
-    end
-    function plotResponse()
+    function y = transform(obj, f)
+      
     end
   end
 end
