@@ -1,7 +1,25 @@
 \chapter{Speaker measurement}
-To compare the MATLAB model with a real speaker, several measurements have been carried out using EQUIPMENT \fxnote{Name of equipment}.
+To compare the MATLAB model with a real speaker, several measurements have been carried out using a PC, the Argon DA-1 amplifier, the Behringer Xenyx 302USB mixer (for PC to microphone connection), a Behringer ECM8000 microphone and alternating between the two speakers shown in \cref{fig:measspeak}.
 
-\input{Speaker/analysis.tex}
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth, clip, trim={0 6cm 0 6cm}]{gfx/Speaker_plexi.jpg}
+		\caption{A see-through speaker with the possibility to remove or insert bass reflexes. Approximate volume: \SI{18}{\litre}. Drive Unit: Fountek FW168.}
+		\label{fig:measspeak1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth, clip, trim={17cm 3cm 14cm 0}]{gfx/Speaker_wood.jpg}
+		\caption{Wooden speaker. Approximate volume: \SI{1.5}{\litre}. Drive Unit: Vifa C11WG-09.}
+		\label{fig:measspeak2}
+	\end{subfigure}
+	\caption{The two speakers used for measurements.}
+	\label{fig:measspeak}
+\end{figure}
+
+%\input{Speaker/analysis.tex}
 %\input{Speaker/design.tex}
 \input{Speaker/implementation.tex}
 \input{Speaker/measurement.tex}
