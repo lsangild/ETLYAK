@@ -5,15 +5,26 @@
 
 This section describes the analysis of the system; how the system is envisioned to be created, which subsystems it will consist of and the tasks each subsystem has to be able to perform to meet the specified requirements.
 
+\section{Circuit Of A Loudspeaker}
+The loudspeaker system can be parted in three equivalent circuits representing the electrical, the mechanical and the acoustical element. Each of these elements can be converted to its electrical equivalent and be represented with an Ohm's Law analogy \cite[p.~115]{Elektroakustik}.
+
+
 \fxnote{Noget om Thiele/Small parametre}
 \section{Thiele/Small Parameters}
-The Thiele/Small parameters is a set of parameters used to specify the performance of a drive unit and is derived by A.N. Thiele \cite{thiele1971loudspeakers} and Richard H. Small \cite{small1972closed}.
-These parameters can be used to decide the volume of the speaker cabinet for best performance. The same goes for the length of the bass-reflex port.
+The Thiele/Small parameters is used to specify the performance of a drive unit and is derived by A.N. Thiele \cite{thiele1971loudspeakers} and Richard H. Small \cite{small1972closed}.
+These parameters can be used to decide the volume of the loudspeaker cabinet and the length of the bass-reflex port. The best performance often includes improving the bass response and to obtain a flatness in general of the frequency response.
 
 The drive unit's performance characteristics are measured at small-signal levels since the mechanical behaviour is linear here.  
 The physical parameters of the drive unit can be found in the datasheet.
 
-\paragraph{$S_d$} is the surface area of the drive unit's diapraghm.
+
+\paragraph{$R_E$} is the DC resistance of the voice coil.
+
+\paragraph{$L_E$} is the inductance of the voice coil.
+
+\paragraph{$f_s$} is the resonance frequency.
+
+\paragraph{$Q_{TS}$} is the combined electric and mechanical damping of the drive unit.
 
 \paragraph{$M_{MS}$} is the mass of the drive unit's moving parts including acoustic load.
 
@@ -21,14 +32,24 @@ The physical parameters of the drive unit can be found in the datasheet.
 
 \paragraph{$R_{MS}$} is the mechanical resistance of the drive unit's suspension.
 
-\paragraph{$L_e$} is the inductance of the voice coil.
-
-\paragraph{$R_e$} is the DC resistance of the voice coil.
-
 \paragraph{$Bl$} is the force factor determined by the product of the magnetic flux density in the air gap and the length of wire in the air gap.
 
+\paragraph{$S_D$} is the surface area of the drive unit's diapraghm.
+
 \section{Modelling}
-The drive unit is modelled as mounted in an infinite enclosure.  
+The drive unit is modelled as mounted in an infinite enclosure, a closed-box loudspeaker system. 
+
+\begin{equation}
+p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\left|\frac{s^2}{s^2 + \frac{\omega_s}{Q_{TS}}+\omega_s^2}\right|
+\label{eq:transdriveunit}
+\end{equation}
+
+\begin{equation}
+L=20\log_{10}\left(\frac{p}{p_{ref}}\right)
+\label{eq:soundpressure}
+\end{equation}
+
+The formulas applies in an area of the drive unit's resonance frequency $f_s$ to the frequency $f_1=\frac{c}{2\pi a}$ where $a$ is the radius of the drive unit's baffle and $c$ is the velocity of sound.\cite[p.~41]{Elektroakustik}
 
 \section{References}
 \begin{itemize}
