@@ -6,6 +6,29 @@
 This section describes the analysis of the system; how the system is envisioned to be created, which subsystems it will consist of and the tasks each subsystem has to be able to perform to meet the specified requirements.
 
 \fxnote{Noget om Thiele/Small parametre}
+\section{Thiele/Small Parameters}
+The Thiele/Small parameters is a set of parameters used to specify the performance of a drive unit and is derived by A.N. Thiele \cite{thiele1971loudspeakers} and Richard H. Small \cite{small1972closed}.
+These parameters can be used to decide the volume of the speaker cabinet for best performance. The same goes for the length of the bass-reflex port.
+
+The drive unit's performance characteristics are measured at small-signal levels since the mechanical behaviour is linear here.  
+The physical parameters of the drive unit can be found in the datasheet.
+
+\paragraph{$S_d$} is the surface area of the drive unit's diapraghm.
+
+\paragraph{$M_{MS}$} is the mass of the drive unit's moving parts including acoustic load.
+
+\paragraph{$C_{MS}$} is the mechanical compliance of the drive unit's suspension.
+
+\paragraph{$R_{MS}$} is the mechanical resistance of the drive unit's suspension.
+
+\paragraph{$L_e$} is the inductance of the voice coil.
+
+\paragraph{$R_e$} is the DC resistance of the voice coil.
+
+\paragraph{$Bl$} is the force factor determined by the product of the magnetic flux density in the air gap and the length of wire in the air gap.
+
+\section{Modelling}
+The drive unit is modelled as mounted in an infinite enclosure.  
 
 \section{References}
 \begin{itemize}
