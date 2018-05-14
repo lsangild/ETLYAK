@@ -7,8 +7,6 @@ classdef Cabinet < TransferFunctions
     rho = 1.1839;
     % Distance to microphone (m)
     R = 1
-    % Reference sound pressure (Pa)
-    %pRef = 20e-6;
     
     %% Box parameters
     % Box volume (L)
@@ -66,10 +64,10 @@ classdef Cabinet < TransferFunctions
       obj.driveUnit = driveUnit;
     end
     
-    function setConstants(obj, c, rho, R, pRef);
+    function setConstants(obj, c, rho, R);
       % Check for correct number of input arguments
-      if ~any([1, 5] == nargin)
-        error(' Call setConsants(c, rho, r, pRef) with 4 parameters or\n%s',...
+      if ~any([1, 4] == nargin)
+        error(' Call setConsants(c, rho, r) with 3 parameters or\n%s',...
         'with 0, setConstants(), to reset to default.');
       end
       
@@ -77,12 +75,10 @@ classdef Cabinet < TransferFunctions
         obj.c = 346.13;
         obj.rho = 1.1839;
         obj.R = 1;
-        obj.pRef = 20e-6;
       else
         obj.c = c;
         obj.rho = rho;
         obj.R = R;
-        obj.pRef = pRef;
       end
     end
     

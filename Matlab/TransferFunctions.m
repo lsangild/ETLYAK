@@ -1,7 +1,5 @@
 classdef TransferFunctions < matlab.mixin.SetGet
   properties (Access = protected)
-    a
-    b
     pRef = 20e-6;
   end
   
