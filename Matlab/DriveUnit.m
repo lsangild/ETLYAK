@@ -3,8 +3,6 @@ classdef DriveUnit < TransferFunctions
     %% Defaults
     % Density of air (kg/m^3)
     rho     = 1.1839;
-    % Reference sound pressure (Pa)
-    %pRef    = 20e-6;
     % Distance to microphone (m)
     rF      = 1;
   end
@@ -28,7 +26,7 @@ classdef DriveUnit < TransferFunctions
           % TRANSFORM Create the transfer function for a drive unit
           % mounted in a infinite (open) baffle.
           %
-          % L = TRANSFORM(f) Returns the sound pressure in dB SPL.
+          % L = TRANSFORM(f) Returns the sound pressure.
           setDerivedParameters(obj);
           % p = rho*Sd*Bl*UG/2*pi*Mms*Re
           %%%%%% EVT. RET TIL BUNDEN AF SIDE 51
@@ -38,9 +36,7 @@ classdef DriveUnit < TransferFunctions
           AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
           p = (A/obj.rF) .* AL;
       end
-  end
   
-  methods (Access = public)
       function setParameters(obj, Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fs)
           % SETPARAMETERS Sets the parameters for the drive unit.
           % The parameters should be found in the datasheet for the 
@@ -76,33 +72,32 @@ classdef DriveUnit < TransferFunctions
           obj.fs = fs;
           setDerivedParameters(obj);
       end
+      
       function setDerivedParameters(obj)
           % SETDERIVEDPARAMETERS Sets the derived parameters 
           % dependent on the given drive unit.
           %
-          % UG Voltage for 1 W electric power in nominel 8 ohm
+          % UG Voltage for 1 W electric power in nominel resistance ohm
           obj.UG = sqrt(1*obj.Rnom);
       end
-      function setConstants(obj, rho, pRef, rF)
+      
+      function setConstants(obj, rho, rF)
         % SETCONSTANTS Change default values of rho, pRef and rf.
         %
         % SETCONSTANTS(rho, pRef, rf)
         % rho  Density of air (kg/m^3)
-        % pRef Reference sound pressure (Pa)
         % rf   Distance to microphone (m)
    
         % Check for correct number of input arguments
-        if ~(any([1, 5] == nargin))
-          error(' Call setConsants(c, rho, r, pRef) with 4 parameters or\n%s',...
+        if ~(any([1, 3] == nargin))
+          error(' Call setConstants(rho, r) with 2 parameters or\n%s',...
           'with 0, setConstants(), to reset to default.');
         end
         if nargin == 1
           obj.rho = 1.1839;
-          obj.pRef = 20e-6;
           obj.rF = 1;
         else
           obj.rho = rho;
-          obj.pRef = pRef;
           obj.rF = rF;
         end
       end

@@ -2,3 +2,6 @@
 % !TEX spellcheck = en_GB
 \section{Implementation}
 \fxnote{Possibly example of a class and description of it}
+The \mintinline{matlab}{DriveUnit} class is shown below for clarification. The overall structure is a standard Matlab class inheriting from TransferFunctions, as shown in \cref{fig:classbdd}. Following are the private and public properties and the public methods, including the implementation of the \mintinline{matlab}{transform(f)} method.
+
+\inputminted[linenos, breaklines, bgcolor=lightgray]{matlab}{../Matlab/DriveUnit.m}
