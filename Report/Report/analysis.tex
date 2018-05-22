@@ -2,7 +2,7 @@
 % !TEX spellcheck = en_GB
 
 \chapter{Analysis}
-
+\fxnote{Introduction to the system. Introduction to Thiele/Small via circuit analysis. Introduction of each subsystem's TF (both from Tore's book and derived).}
 This section describes the analysis of the system; how the system is envisioned to be created, which subsystems it will consist of and the tasks each subsystem has to be able to perform to meet the specified requirements.
 
 \section{Circuit Of A Loudspeaker}
@@ -40,7 +40,7 @@ The physical parameters of the drive unit can be found in the datasheet.
 The drive unit is modelled as mounted in an infinite enclosure, a closed-box loudspeaker system. 
 
 \begin{equation}
-p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\left|\frac{s^2}{s^2 + \frac{\omega_s}{Q_{TS}}+\omega_s^2}\right|
+p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\left|\frac{s^2}{s^2 + \frac{\omega_s}{Q_{TS}}s+\omega_s^2}\right|
 \label{eq:transdriveunit}
 \end{equation}
 
