@@ -5,16 +5,18 @@
 \fxnote{Introduction to the system. Introduction to Thiele/Small via circuit analysis. Introduction of each subsystem's TF (both from Tore's book and derived).}
 This section describes the analysis of the system; how the system is envisioned to be created, which subsystems it will consist of and the tasks each subsystem has to be able to perform to meet the specified requirements.
 
-\section{Circuit Of A Loudspeaker}
+\section{Loudspeaker Modelling}
 The loudspeaker system can be parted in three equivalent circuits representing the electrical, the mechanical and the acoustical element. Each of these elements can be converted to its electrical equivalent and be represented with an Ohm's Law analogy \cite[p.~115]{Elektroakustik}.
 
+The electrical element of the loudspeaker is specified by the voice coil with its DC resistance $R_e$ and self inductance $L_e$. The coupling between the electrical element and the mechanical element is specified as the force factor $Bl$. This is the product of the magnetic field in the voice coil gap and the length of the voice coil in the magnetic field. \cite[p.~34]{Elektroakustik}
 
-\fxnote{Noget om Thiele/Small parametre}
-\section{Thiele/Small Parameters}
-The Thiele/Small parameters is used to specify the performance of a drive unit and is derived by A.N. Thiele \cite{thiele1971loudspeakers} and Richard H. Small \cite{small1972closed}.
-These parameters can be used to decide the volume of the loudspeaker cabinet and the length of the bass-reflex port. The best performance often includes improving the bass response and to obtain a flatness in general of the frequency response.
+The mechanical element of the loudspeaker is specified by the mass $M_{MD}$ of the diaphragm, the mechanical damping $R_{MS}$ and the compliance $C_{MS}$. The mechanical element will introduce a resonance frequency $f_S$ and is described by its quality factor $Q_{MS}$. A total quality factor $Q_{TS}$ is found when combining the Q-factor for the electrical and mechanical element.
 
-The drive unit's performance characteristics are measured at small-signal levels since the mechanical behaviour is linear here.  
+The acoustical element of the loudspeaker is specified by an acoustical impedance in front and behind the diaphragm. The acoustical impedance in front is given by relation between sound pressure $p$ and volume velocity $q$ which is the velocity of air that is moved by the diaphragm. 
+
+These parameters are known as Thiele/Small parameters and are used to specify the performance of a drive unit and is derived by A.N. Thiele \cite{thiele1971loudspeakers} and Richard H. Small \cite{small1972closed}.
+The parameters can be used to decide the volume of the loudspeaker cabinet and the length of the bass-reflex port. The best performance often includes improving the bass response and to obtain a flatness in general of the frequency response. \\
+
 The physical parameters of the drive unit can be found in the datasheet.
 
 
@@ -36,7 +38,9 @@ The physical parameters of the drive unit can be found in the datasheet.
 
 \paragraph{$S_D$} is the surface area of the drive unit's diapraghm.
 
-\section{Modelling}
+\section{Transfer Functions}
+Each subsystem have a transfer function that can be derived from the Thiele/Small parameters.
+\subsection{Drive Unit}
 The drive unit is modelled as mounted in an infinite enclosure, a closed-box loudspeaker system. 
 
 \begin{equation}
@@ -49,7 +53,13 @@ L=20\log_{10}\left(\frac{p}{p_{ref}}\right)
 \label{eq:soundpressure}
 \end{equation}
 
-The formulas applies in an area of the drive unit's resonance frequency $f_s$ to the frequency $f_1=\frac{c}{2\pi a}$ where $a$ is the radius of the drive unit's baffle and $c$ is the velocity of sound.\cite[p.~41]{Elektroakustik}
+The formulas applies in an area of the drive unit's resonance frequency $f_S$ to the frequency $f_1=\frac{c}{2\pi a}$ where $a$ is the radius of the drive unit's baffle and $c$ is the velocity of sound.\cite[p.~41]{Elektroakustik}
+
+\subsection{Crossover Filter}
+
+\subsection{Cabinet}
+
+\subsection{Bass Reflex}
 
 \section{References}
 \begin{itemize}
