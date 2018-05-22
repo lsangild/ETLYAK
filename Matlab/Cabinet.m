@@ -32,7 +32,7 @@ classdef Cabinet < TransferFunctions
     function pF = transform(obj, f)
         setDerivedParameters(obj);
         s = 1i .* 2 .* pi .* f;
-        qF = obj.FA ./ (obj.RAE + s .* obj.MAS + 1 ./ (s .* obj.CAS) + obj.RAS + 1 .* (s .* obj.CAB));
+        qF = obj.FA ./ (obj.RAE + s .* obj.MAS + 1 ./ (s .* obj.CAS) + obj.RAS + 1 ./ (s .* obj.CAB));
         pF = obj.rho .* s .* qF ./ (2 * pi * obj.R);
     end
     
