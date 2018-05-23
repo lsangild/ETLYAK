@@ -9,22 +9,22 @@ k.plotResponse(logspace(0,4,1000));
 
 %%
 % 26.8cm x 20.2cm x 33.0cm
-V = (26.8e-2*20.2e-2*33.0e-2)*1000; 
-u = Cabinet(V);
+V = (26.8e-2*20.2e-2*33.0e-2); 
+u = Cabinet(10);
 u.setDriveUnit(k);
 u.plotResponse(logspace(0,4,100));
 
 %%
 cf = CrossoverFilter();
-% setBehaviour(f1, f2, order, type)
-cf.setBehaviour(500, 3, 'low');
+% setBehaviour(f1, f2, Q, type)
+cf.setBehaviour(500, 0.7, 'low');
 cf.plotResponse(logspace(1, 4, 100));
 
 %%
 sp = Speaker();
 set(sp, 'filter', cf);
 set(sp, 'cabinet', u);
-sp.plotResponse(logspace(1, 3, 100));
+sp.plotResponse(logspace(0, 3, 100));
 
 %% 
 pg = load('PG_closed.mat');
