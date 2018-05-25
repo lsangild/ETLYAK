@@ -6,7 +6,7 @@
 This section describes the analysis of the system; how the system is envisioned to be created, which subsystems it will consist of and the tasks each subsystem has to be able to perform to meet the specified requirements.
 
 \section{Loudspeaker Modelling}
-The loudspeaker system can consist of multiple drive units reproducing sound in different frequency spectres.
+The loudspeaker system can consist of multiple drive units reproducing sound in different frequency spectra.
 The drive unit can be parted in three equivalent circuits representing the electrical, the mechanical and the acoustical element. 
 Each of these elements can be converted to its electrical equivalent and be represented with an Ohm's Law analogy \cite[p.~115]{Elektroakustik}.
 
@@ -87,15 +87,15 @@ H = k\,\dfrac{s^2}{s^2+\frac{\omega_s}{Q_{TS}}+\omega_s^2}
 \fxnote{Skal være lukket kabinet tf}
 
 \subsection{Crossover Filter}
-Different drive units are differently designed to reproduce the sound in specific frequency spectres.
-When a loudspeaker system consist of multiple drive units a crossover filter is used to separate these frequency spectres.
-For a drive unit (tweeter) reproducing the high frequency spectre, a second order highpass filter is used to filter the low frequency spectre, see eq. \ref{eq:high}.
+Different drive units are differently designed to reproduce the sound in specific frequency spectra.
+When a loudspeaker system consist of multiple drive units a crossover filter is used to separate these frequency spectrums.
+For a drive unit (tweeter) reproducing the high frequency spectrum, a second order high pass filter is used to filter the low frequency spectrum, see eq. \ref{eq:high}.
 \begin{equation}
 H_{T} = \frac{s^2}{\omega_0^2+2d\,\omega_0 s+s^2}
 \label{eq:high}
 \end{equation}
 
-For a drive unit (woofer) reproducing the low frequency spectre, a second order lowpass filter is used to filter the high frequency spectre, see eq. \ref{eq:low}.
+For a drive unit (woofer) reproducing the low frequency spectrum, a second order low pass filter is used to filter the high frequency spectrum, see eq. \ref{eq:low}.
 \begin{equation}
 H_{W} = \frac{\omega_0^2}{\omega_0^2+2d\,\omega_0 s+s^2}
 \label{eq:low}
