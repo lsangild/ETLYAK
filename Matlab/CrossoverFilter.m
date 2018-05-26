@@ -1,8 +1,13 @@
 classdef CrossoverFilter < TransferFunctions
-    properties
+    properties (Access = public)
+    passthrough = 0;
+    
+    properties (Access = private)
         f0
         Q
         type
+        
+        % Derived
         d
     end
     methods (Access = public)

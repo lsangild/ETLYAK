@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>730</x>
-      <y>30</y>
+      <x>680</x>
+      <y>50</y>
       <w>340</w>
       <h>120</h>
     </coordinates>
@@ -22,8 +22,8 @@ BassReflex
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>50</x>
-      <y>180</y>
+      <x>0</x>
+      <y>200</y>
       <w>190</w>
       <h>120</h>
     </coordinates>
@@ -40,8 +40,8 @@ Speaker
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
-      <y>30</y>
+      <x>420</x>
+      <y>50</y>
       <w>210</w>
       <h>80</h>
     </coordinates>
@@ -55,8 +55,8 @@ TransferFunction
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>130</x>
-      <y>100</y>
+      <x>80</x>
+      <y>120</y>
       <w>450</w>
       <h>100</h>
     </coordinates>
@@ -66,8 +66,8 @@ TransferFunction
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
-      <y>150</y>
+      <x>330</x>
+      <y>170</y>
       <w>30</w>
       <h>50</h>
     </coordinates>
@@ -77,8 +77,8 @@ TransferFunction
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>550</x>
-      <y>150</y>
+      <x>500</x>
+      <y>170</y>
       <w>440</w>
       <h>50</h>
     </coordinates>
@@ -88,8 +88,8 @@ TransferFunction
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>150</y>
+      <x>610</x>
+      <y>170</y>
       <w>30</w>
       <h>50</h>
     </coordinates>
@@ -99,22 +99,20 @@ TransferFunction
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>830</x>
-      <y>180</y>
+      <x>780</x>
+      <y>200</y>
       <w>280</w>
-      <h>200</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 CrossoverFilter
 --
 - f0 : double
-- order : double
+- Q : double
 - type : string
-- b : double
-- a : double
 + passThrough : bool
 --
-+ setBehaviour(f0, order, type) : void
++ setBehaviour(f0, Q, type) : void
 + transform(x) : double
 + printComponents() : void</panel_attributes>
     <additional_attributes/>
@@ -122,14 +120,17 @@ CrossoverFilter
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>260</x>
-      <y>180</y>
-      <w>180</w>
-      <h>200</h>
+      <x>210</x>
+      <y>200</y>
+      <w>240</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 DriveUnit
 --
+- rho : double
+- R : double
+- fs : double
 - Qts : double
 - Bl : double
 - Rms : double
@@ -139,28 +140,37 @@ DriveUnit
 - RDC : double
 - Rnom : double
 --
-+ transform(x) : double</panel_attributes>
++ transform(x) : double
++ setParameters(Qts, Bl, Rms,
+    Mms, Cms, Sd, RDC, Rnom,
+    fs) : void
++ setConstants(rho, R);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>180</y>
-      <w>360</w>
-      <h>150</h>
+      <x>470</x>
+      <y>200</y>
+      <w>290</w>
+      <h>250</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Class&gt;&gt;
 Cabinet
 --
-- Vb
-- 
-- dim[height, width, depth] : double
+- volume : double
+- c : double
+- rho : double
+- R : double
+- driveUnit : DriveUnit
 - bassReflex[] : BassReflex
 --
 + transform(x) : double
-+ addBassReflex(circumference, depth, location)
-+ addBassReflex(BassReflex)</panel_attributes>
++ setDriveUnit(DriveUnit) : void
++ addBassReflex(circumference, depth,
+    location) : void
++ addBassReflex(BassReflex) : void
++ setConstants(c, rho, R) : void</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

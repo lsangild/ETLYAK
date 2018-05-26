@@ -1,5 +1,5 @@
 classdef Cabinet < TransferFunctions
-  properties (Access = public)
+  properties (Access = private)
     %% Defaults
     % Speed of sound (m/s) (default for 25 °C)
     c = 346.13;
