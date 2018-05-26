@@ -10,7 +10,7 @@ k.plotResponse(logspace(0,4,1000));
 %%
 % 26.8cm x 20.2cm x 33.0cm
 V = (26.8e-2*20.2e-2*33.0e-2); 
-u = Cabinet(10);
+u = Cabinet(V);
 u.setDriveUnit(k);
 u.plotResponse(logspace(0,4,100));
 

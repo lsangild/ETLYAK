@@ -120,3 +120,11 @@ If the method is not called the default values specified in the property definit
     end
 end
 \end{minted}
+
+
+\begin{minted}[linenos, breaklines, bgcolor=lightgray]{matlab}
+k = DriveUnit();
+% setParameters(Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fS)
+k.setParameters(0.397, 8.2, 1.3036, 14.7e-3, 0.821e-3, 119, 7.2, 8, 45);
+k.plotResponse(logspace(0,4,1000));
+\end{minted}
