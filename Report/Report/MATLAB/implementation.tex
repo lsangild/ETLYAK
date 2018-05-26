@@ -2,6 +2,121 @@
 % !TEX spellcheck = en_GB
 \section{Implementation}
 \fxnote{Possibly example of a class and description of it. Mostly ref to appendix for code. Example of output, maybe compared to other output.}
-The \mintinline{matlab}{DriveUnit} class is shown below for clarification. The overall structure is a standard Matlab class inheriting from TransferFunctions, as shown in \cref{fig:classbdd}. Following are the private and public properties and the public methods, including the implementation of the \mintinline{matlab}{transform(f)} method.
+The \mintinline{matlab}{DriveUnit} class is shown below for clarification. 
+The overall structure is a standard Matlab class inheriting from TransferFunctions, as shown in \cref{fig:classbdd}. 
+Following are the private and public properties and the public methods, including the implementation of the \mintinline{matlab}{transform(f)} method.
 
-\inputminted[linenos, breaklines, bgcolor=lightgray]{matlab}{../Matlab/DriveUnit.m}
+Matlab evaluates the property definition section only once and assigns the same value to the property of every instance in the class.\fxnote{https://se.mathworks.com/help/matlab/matlab\_oop/specifying-properties.html}
+The default values are specified individually as private or public.
+The private properties include constants so these properties gets a default value that other instances can not access. 
+Instead the datasheet values for the drive unit is public so other instances, e.g. \mintinline{matlab}{Cabinet}, can access these values.
+
+The implementations of all the classes in the MATLAB framework can be found in appendix, \cref{app:code}. 
+
+
+\begin{minted}[linenos, breaklines, bgcolor=lightgray]{matlab}
+classdef DriveUnit < TransferFunctions
+    properties (Access = private)
+	%% Defaults
+	% Density of air (kg/m^3)
+	rho     = 1.1839;
+	% Distance to microphone (m)
+	rF      = 1;
+	end
+    properties (Access = public)
+	%% Data sheet values
+	fs
+	Qts
+	Bl
+	Rms
+	Mms
+	Cms
+	Sd
+	Re
+	Rnom
+	%% Derived values
+	UG
+    end
+\end{minted}
+
+The methods are public so \mintinline{matlab}{TransferFunctions} can access the \mintinline{matlab}{transform(f)} method to plot the frequency response of the drive unit. See appendix in \cref{app:code} for implemtation of \mintinline{matlab}{TransferFunctions}.
+The implementation of the \mintinline{matlab}{transform(f)} method create the transfer function for a drive unit using the properties specified.
+The transfer function for a drive unit can be found in \cref{seq:driveunit}, \cref{eq:dutfclosed}.
+
+\begin{minted}[linenos, breaklines, firstnumber=last, bgcolor=lightgray]{matlab}
+    methods (Access = public)
+	function p = transform(obj, f)
+	    % Create the transfer function for a drive unit
+	    % mounted in an infinite baffle.
+	    setDerivedParameters(obj);
+	    A = (obj.rho * obj.Sd * obj.Bl * obj.UG) / (2 * pi * obj.Mms * obj.Re);
+	    wS = 2 * pi * obj.fs;
+	    s = 1i .* 2 .* pi .* f;
+	    AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
+	    p = (A/obj.rF) .* AL;
+	end
+\end{minted}
+
+The \mintinline{matlab}{setParameters(Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fs)} 
+\newline method is used to set the parameters for the drive unit.
+The Thiele/Small parameters is found in the datasheet for the given drive unit. 
+A input validation is performed for the Sd parameter as it is specified either in $\si{\square\meter}$ or $\si{\square\centi\meter}$ in the datasheets.
+\begin{minted}[linenos, breaklines, firstnumber=last, bgcolor=lightgray]{matlab}
+	function setParameters(obj, Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fs)
+	    % Sets the parameters for the drive unit.
+	    % The parameters should be found in the datasheet
+	    % for the given drive unit. 
+	    if (Qts > 0) && (Qts < 1)
+		obj.Qts = Qts;
+	    else 
+		warning('Qts must be a value between 0 and 1')
+	    end
+	
+	    if  (Sd > 1) && (Sd < 1000)
+		obj.Sd = Sd/1000;
+	    else
+		warning('Sd is specified in cm^2')
+	    end
+	    obj.Bl = Bl;
+	    obj.Rms = Rms;
+	    obj.Mms = Mms;
+	    obj.Cms = Cms;
+	    obj.Re = Re;
+	    obj.Rnom = Rnom;
+	    obj.fs = fs;
+	    setDerivedParameters(obj);
+	end
+\end{minted}
+
+The \mintinline{matlab}{setDerivedParameters()} method sets the $U_G$ voltage given on the nominel resistance $R_{nom}$ specified in the \mintinline{matlab}{setParameters} method. 
+The $U_G$ voltage is set so the input for the drive unit is \SI{1}{\watt} since the sensitivity is specified in \si{\decibel} per \SI{1}{\watt} in a distance of \SI{1}{\meter}.
+\begin{minted}[linenos, breaklines, firstnumber=last, bgcolor=lightgray]{matlab}
+	function setDerivedParameters(obj)
+	    % Sets the derived parameters 
+	    % dependent on the given drive unit.
+	    % UG Voltage for 1 W electric power in nominel resistance ohm
+	    obj.UG = sqrt(1*obj.Rnom);
+	end
+\end{minted}
+
+The \mintinline{matlab}{setConstants()} method make it possible for the user to change parameters who usually are constants as density of air. 
+If the method is not called the default values specified in the property definition section is applied.   
+\begin{minted}[linenos, breaklines, firstnumber=last, bgcolor=lightgray]{matlab}
+	function setConstants(obj, rho, rF)
+	    % Change default values of rho, pRef and rf.	
+	    % Check for correct number of input arguments
+	    if ~(any([1, 3] == nargin))
+		error(' Call setConstants(rho, r) with 2 parameters or\n%s',...
+		'with 0, setConstants(), to reset to default.');
+	    end
+	    if nargin == 1
+		obj.rho = 1.1839;
+		obj.rF = 1;
+	    else
+		obj.rho = rho;
+		obj.rF = rF;
+	    end
+	end
+    end
+end
+\end{minted}

@@ -48,6 +48,7 @@ The physical parameters of the drive unit can be found in the datasheet.
 The loudspeaker being modelled in this project has been parted in 4 subsystems; a drive unit, a cross-over filter, a cabinet and a bass reflex. 
 Each subsystem have a transfer function that can be derived from the Thiele/Small parameters.
 \subsection{Drive Unit}
+\label{seq:driveunit}
 The drive unit can be modelled as mounted in an infinite baffle, separating the front and back side of the diaphragm, thus avoiding acoustic short circuiting. 
 Placing the drive unit in an infinite baffle prevents the pressure at the front and back to eliminate each other. \cite[p.~44]{Elektroakustik}  
 The transfer function for a drive unit placed in an infinite baffle is shown in \cref{eq:dutfinfinite}.
@@ -89,17 +90,22 @@ H = k\,\dfrac{s^2}{s^2+\frac{\omega_s}{Q_{TS}}+\omega_s^2}
 \subsection{Crossover Filter}
 Different drive units are differently designed to reproduce the sound in specific frequency spectra.
 When a loudspeaker system consist of multiple drive units a crossover filter is used to separate these frequency spectrums.
-For a drive unit (tweeter) reproducing the high frequency spectrum, a second order high pass filter is used to filter the low frequency spectrum, see eq. \ref{eq:high}.
+For a drive unit (tweeter) reproducing the high frequency spectrum, a second order high pass filter is used to filter the low frequency spectrum, see eq. \ref{eq:high}.\cite[p.~82-83]{Elektroakustik}
 \begin{equation}
-H_{T} = \frac{s^2}{\omega_0^2+2d\,\omega_0 s+s^2}
+H_{T} = \frac{s^2}{\omega_0^2+2\zeta\,\omega_0 s+s^2}
 \label{eq:high}
 \end{equation}
 
 For a drive unit (woofer) reproducing the low frequency spectrum, a second order low pass filter is used to filter the high frequency spectrum, see \cref{eq:low}.
 \begin{equation}
-H_{W} = \frac{\omega_0^2}{\omega_0^2+2d\,\omega_0 s+s^2}
+H_{W} = \frac{\omega_0^2}{\omega_0^2+2\zeta\,\omega_0 s+s^2}
 \label{eq:low}
 \end{equation}
+
+A quality factor is introduced for the crossover filter, as it was for the drive unit itself. 
+With a Q-factor of 0.7 a maximal flat pass-band filter is made.
+This is known as a butterworth filter. 
+The sharper the transition band needs to be, the higher the Q-factor, given the damping factor $\zeta\,$ which is the inverse of Q. 
 
 \subsection{Cabinet}
 
@@ -114,18 +120,6 @@ L=20\log_{10}\left(\frac{p}{p_{ref}}\right)
 \end{equation}
 
 The formulas applies in an area between the drive unit's resonance frequency $f_S$ and approx. the frequency $f_1\approx\frac{c}{2\pi a}$ where $a$ is the radius of the drive unit's baffle and $c$ is the velocity of sound. \cite[p.~41]{Elektroakustik}
-
-\section{References}
-\begin{itemize}
-	\item The design of second-order crossover filter
-	\begin{itemize}
-		\item Elektroakustik Version 2.6, page 82, Tore Arne Skogsberg
-	\end{itemize}
-	\item Model of speaker drive unit infinite baffel
-	\begin{itemize}
-		\item Elektroakustik Version 2.6, page 41, Tore Arne Skogsberg
-	\end{itemize}
-\end{itemize}
 
 
 
