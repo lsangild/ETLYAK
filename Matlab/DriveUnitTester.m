@@ -1,9 +1,12 @@
 clear all
 
+load Measurements.mat
+
 k = DriveUnit();
 % setParameters(Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fs)
 %k.setParameters(0.66, 5.1, 0.6, 7e-3, 1.45e-3, 5.4, 5.6, 8, 50);
-k.setParameters(0.397, 8.2, 1.3036, 14.7e-3, 0.821e-3, 119, 7.2, 8, 45);
+k.setParameters(0.397, 8.2, 1.3036, 14.7e-3, 0.821e-3, 119, 7.2, 8, 45); % See-through speaker
+
 
 k.plotResponse(logspace(1,4,1000));
 

@@ -19,6 +19,28 @@ To compare the MATLAB model with a real speaker, several measurements have been 
 	\label{fig:measspeak}
 \end{figure}
 
+\begin{table}
+	\centering
+	\begin{tabular}{l c c}
+		\toprule
+		 & \textbf{See-through} & \textbf{Wooden} \\
+ 		 \midrule
+		 $S_D/\si{\centi\meter\squared}$ & \num{119} & \num{55.0} \\
+		 $M_{ms}/\si{\gram}$ & \num{14.7} & \num{4.9} \\
+		 $C_{ms}/\si{\milli\metre\per\newton}$ & \num{0.821} & \num{0.997} \\
+		 $L_e/\si{\milli\henry}$ & - & \num{0.4} \\
+		 $R_e/\si{\ohm}$ & \num{7.2} & \num{3.2} \\
+		 $Bl/\si{\tesla\metre}$ & \num{8.2} & \num{3.8} \\
+		 $V_{as}/\si{\litre}$ & \num{16.5} & \num{4.2} \\
+		 $f_s/\si{\hertz}$ & \num{45} & \num{72} \\
+		 $Q_{ts}$ & \num{0.397} & \num{0.40} \\
+		 $R_{nom}/\si{\ohm}$ & \num{8} & \num{4} \\
+		 \bottomrule
+	\end{tabular}
+	\caption{Thiele/Small parameters for the used drive units according to \cite{vifa} and \cite{fountek}.}
+	\label{tab:thielesmall}
+\end{table}
+
 %\input{Speaker/analysis.tex}
 %\input{Speaker/design.tex}
 \input{Speaker/implementation.tex}
