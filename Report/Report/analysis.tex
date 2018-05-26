@@ -66,7 +66,7 @@ If the drive unit is placed in a very large sealed enclosure it will make the mo
 The transfer function for a drive unit placed in an enclosure is shown in \cref{eq:dutfclosed}.
 
 \begin{equation}
-p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}\left(1+\frac{C_{MS}S_D^2}{C_{AB}}\right)}
+p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}\left(1+\frac{C_{MS}{S_D}^2}{C_{AB}}\right)}
 \label{eq:dutfclosed}
 \end{equation}
 
@@ -108,6 +108,16 @@ This is known as a butterworth filter.
 The sharper the transition band needs to be, the higher the Q-factor, given the damping factor $\zeta\,$ which is the inverse of Q. 
 
 \subsection{Cabinet}
+
+The volume speed from a loud speaker in a cabinet can be modelled by \
+
+\begin{align}
+	q &= \frac{\frac{Bl}{R_E S_D}U_G}{\frac{\left(Bl\right)^2}{R_E {S_D}^2} + s\frac{M_{MS}}{{S_D}^2}+\frac{1}{s C_{MS} {S_D}^2}+\frac{R_{MS}}{{S_D}^2}+\frac{1}{s C_{AB}}} \\
+	p &= j\frac{\rho f}{r}q \\
+	&\Rightarrow \frac{\rho s}{2\pi r}q \\
+	p &= \frac{\rho}{2\pi}\frac{Bl U_G}{R_E S_D}\frac{s^2}{s^2\frac{M_{MS}}{{S_D}^2}+s\left(\frac{\left(Bl\right)^2}{R_E {S_D}^2} + \frac{R_{MS}}{{S_D}^2}\right) + \left(\frac{1}{C_{MS}{S_D}^2} + \frac{1}{C_{AB}}\right)} \\
+	&\Rightarrow \frac{\rho}{2\pi}\frac{BlU_G S_D}{R_E M_{MS}}
+\end{align}
 
 \subsection{Bass Reflex}
 
