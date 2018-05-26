@@ -49,38 +49,40 @@ The loudspeaker being modelled in this project has been parted in 4 subsystems; 
 Each subsystem have a transfer function that can be derived from the Thiele/Small parameters.
 
 \subsection{Cabinet}
-The transfer function for a drive unit placed in an enclosure is shown in \cref{eq:dutfclosed}.
-
-\begin{equation}
-p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}\left(1+\frac{C_{MS}{S_D}^2}{C_{AB}}\right)}
-\label{eq:dutfclosed}
-\end{equation}
-
-
-
-\subsection{Drive Unit}
-\label{seq:driveunit}
-The drive unit can be modelled as mounted in an infinite baffle, separating the front and back side of the diaphragm, thus avoiding acoustic short circuiting. 
-Placing the drive unit in an infinite baffle prevents the pressure at the front and back to eliminate each other. \cite[p.~44]{Elektroakustik}  
-The transfer function for a drive unit placed in an infinite baffle is shown in \cref{eq:dutfinfinite}.
-The sound pressure is specified at a distance $r=\SI{1}{\meter}$.  \fxnote{Potentially show the long equation taking into account diffraction and reflection?}
-
-\begin{equation}
-p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\left|\frac{s^2}{s^2 + \frac{\omega_s}{Q_{TS}}s+\omega_s^2}\right|
-\label{eq:dutfinfinite}
-\end{equation}
-
-In this project the drive unit is being modelled as mounted in an infinite enclosure, a closed cabinet.
-Placing the drive unit in enclosure will prevent acoustic short circuiting as well. 
-The volume of the closed cabinet is characterized by the air acting like a spring (a capacity) which affects the drive unit's compliance.  
-If the drive unit is placed in a very large sealed enclosure it will make the model behave like the drive unit was mounted in an infinite baffle.  
+The cabinet is a sealed enclosure, which separates the front and back side of the diaphragm, thus avoiding acoustic short circuiting. 
+Placing a drive unit in a sealed enclosure prevents the pressure at the front and back to eliminate each other. \cite[p.~44]{Elektroakustik}  
+The volume of the closed cabinet is characterized by the air acting like a spring (a capacity) which affects the drive unit's compliance, see \cref{eq:cab}. 
 
 \begin{equation}
 C_{AB} = \frac{V_B}{\rho \,c^2}
 \label{eq:cab}
 \end{equation} 
 
-When the volume becomes very large the compliance as well becomes very large, \cref{eq:cab}. 
+The transfer function for a drive unit placed in an enclosure is shown in \cref{eq:dutfclosed}.
+The sound pressure is specified at a distance $r=\SI{1}{\meter}$. 
+
+\begin{equation}
+p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}\left(1+\frac{C_{MS}{S_D}^2}{C_{AB}}\right)}
+\label{eq:dutfclosed}
+\end{equation}
+
+The constant term in \cref{eq:dutfclosed} transforms the voltage $U_G$ to the sound pressure $p$ while the complex term represent a second order high pass filter.
+
+\subsection{Drive Unit}
+\label{seq:driveunit}
+The drive unit can be modelled as mounted in an infinite baffle, which also separates the front and back side of the diaphragm.
+The transfer function for a drive unit placed in an infinite baffle is shown in \cref{eq:dutfinfinite}. This equation contains the diffraction and reflection seen in the two last terms.
+
+
+\begin{align}
+	p =& \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\left|\frac{s^2}{s^2 + \frac{\omega_s}{Q_{TS}}s+\omega_s^2}\right| \label{eq:dutfinfinite} \\
+	& \left[1-\frac{r_F}{r_B}D(ka)\exp(-jk(r_B-r_F))\right] \left[1-\frac{r_F}{r_R}D(ka)\exp(-jk(r_R-r_F))\right]\notag
+\end{align}
+
+In this project the drive unit is being modelled as mounted in an infinite enclosure, a closed cabinet. Doing this will avoid the diffraction and reflection terms in \cref{eq:dutfinfinite}.
+Placing the drive unit in enclosure will prevent acoustic short circuiting as well.   
+If the drive unit is placed in a very large sealed enclosure it will make the model behave like the drive unit was mounted in an infinite baffle.  
+When the volume becomes very large the compliance as well becomes very large seen in \cref{eq:cab}. 
 The term containing the $C_{AB}$ variable can be left out of \cref{eq:dutfclosed} and the transfer function for a drive unit placed in an very large enclosure is now as shown in \cref{eq:dutfclosedvolume}.
 
 \begin{align}
@@ -88,15 +90,6 @@ The term containing the $C_{AB}$ variable can be left out of \cref{eq:dutfclosed
 	\Rightarrow p_\infty &= \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}}
 	\label{eq:dutfclosedvolume}
 \end{align}
-
-The constant term in \cref{eq:dutfclosedvolume} transforms the voltage $U_G$ to the sound pressure $p$ while the complex term represent a second order high pass filter.
-The transfer function of the drive unit is shown in \cref{eq:dutfderived}.
-
-\begin{equation}
-H = k_0\,\dfrac{s^2}{s^2+k_1\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}+\frac{1}{M_{MS}C_{MS}}}
-\label{eq:dutfderived}
-\end{equation}
-\fxnote{Skal være lukket kabinet tf}
 
 \subsection{Crossover Filter}
 Different drive units are differently designed to reproduce the sound in specific frequency spectra.
@@ -117,18 +110,6 @@ A quality factor is introduced for the crossover filter, as it was for the drive
 With a Q-factor of 0.7 a maximal flat pass-band filter is made.
 This is known as a butterworth filter. 
 The sharper the transition band needs to be, the higher the Q-factor, given the damping factor $\zeta\,$ which is the inverse of Q. 
-
-\subsection{Cabinet}
-
-The volume speed from a loud speaker in a cabinet can be modelled by \
-
-\begin{align}
-	q &= \frac{\frac{Bl}{R_E S_D}U_G}{\frac{\left(Bl\right)^2}{R_E {S_D}^2} + s\frac{M_{MS}}{{S_D}^2}+\frac{1}{s C_{MS} {S_D}^2}+\frac{R_{MS}}{{S_D}^2}+\frac{1}{s C_{AB}}} \\
-	p &= j\frac{\rho f}{r}q \\
-	&\Rightarrow \frac{\rho s}{2\pi r}q \\
-	p &= \frac{\rho}{2\pi}\frac{Bl U_G}{R_E S_D}\frac{s^2}{s^2\frac{M_{MS}}{{S_D}^2}+s\left(\frac{\left(Bl\right)^2}{R_E {S_D}^2} + \frac{R_{MS}}{{S_D}^2}\right) + \left(\frac{1}{C_{MS}{S_D}^2} + \frac{1}{C_{AB}}\right)} \\
-	&\Rightarrow \frac{\rho}{2\pi}\frac{BlU_G S_D}{R_E M_{MS}}
-\end{align}
 
 \subsection{Bass Reflex}
 

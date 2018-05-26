@@ -24,7 +24,7 @@ classdef DriveUnit < TransferFunctions
   methods (Access = public)
       function p = transform(obj, f)
           % TRANSFORM Create the transfer function for a drive unit
-          % mounted in an infinite baffle.
+          % mounted in an infinite sealed inclosure.
           %
           % L = TRANSFORM(f) Returns the sound pressure.
           setDerivedParameters(obj);
@@ -34,10 +34,6 @@ classdef DriveUnit < TransferFunctions
           k1 = ((obj.Bl^2) / (obj.Re * obj.Mms)) + (obj.Rms / obj.Mms);
           k2 = 1 / (obj.Mms * obj.Cms);
           p = k0 .* (s.^2 ./ (s.^2 + s .* k1 + k2));
-          
-          %wS = 2 * pi * obj.fs;
-          %AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
-          %p = (A/obj.R) .* AL;
       end
   
       function setParameters(obj, Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fs)

@@ -21,7 +21,7 @@ classdef DriveUnit < TransferFunctions
 	% Density of air (kg/m^3)
 	rho     = 1.1839;
 	% Distance to microphone (m)
-	rF      = 1;
+	R      = 1;
 	end
     properties (Access = public)
 	%% Data sheet values
@@ -47,13 +47,13 @@ The transfer function for a drive unit can be found in \cref{seq:driveunit}, \cr
     methods (Access = public)
 	function p = transform(obj, f)
 	    % Create the transfer function for a drive unit
-	    % mounted in an infinite baffle.
+	    % mounted in an infinite sealed enclosure.
 	    setDerivedParameters(obj);
-	    A = (obj.rho * obj.Sd * obj.Bl * obj.UG) / (2 * pi * obj.Mms * obj.Re);
-	    wS = 2 * pi * obj.fs;
 	    s = 1i .* 2 .* pi .* f;
-	    AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
-	    p = (A/obj.rF) .* AL;
+	    k0 = (obj.rho * obj.Bl * obj.Sd * obj.UG) / (2 * pi * obj.R * obj.Re * obj.Mms);
+	    k1 = ((obj.Bl^2) / (obj.Re * obj.Mms)) + (obj.Rms / obj.Mms);
+	    k2 = 1 / (obj.Mms * obj.Cms);
+	    p = k0 .* (s.^2 ./ (s.^2 + s .* k1 + k2));
 	end
 \end{minted}
 
@@ -66,17 +66,12 @@ A input validation is performed for the Sd parameter as it is specified either i
 	    % Sets the parameters for the drive unit.
 	    % The parameters should be found in the datasheet
 	    % for the given drive unit. 
-	    if (Qts > 0) && (Qts < 1)
-		obj.Qts = Qts;
-	    else 
-		warning('Qts must be a value between 0 and 1')
-	    end
-	
 	    if  (Sd > 1) && (Sd < 1000)
 		obj.Sd = Sd/1000;
 	    else
 		warning('Sd is specified in cm^2')
 	    end
+	    obj.Qts = Qts;
 	    obj.Bl = Bl;
 	    obj.Rms = Rms;
 	    obj.Mms = Mms;
@@ -102,8 +97,8 @@ The $U_G$ voltage is set so the input for the drive unit is \SI{1}{\watt} since 
 The \mintinline{matlab}{setConstants()} method make it possible for the user to change parameters who usually are constants as density of air. 
 If the method is not called the default values specified in the property definition section is applied.   
 \begin{minted}[linenos, breaklines, firstnumber=last, bgcolor=lightgray]{matlab}
-	function setConstants(obj, rho, rF)
-	    % Change default values of rho, pRef and rf.	
+	function setConstants(obj, rho, R)
+	    % Change default values of rho, pRef and R.	
 	    % Check for correct number of input arguments
 	    if ~(any([1, 3] == nargin))
 		error(' Call setConstants(rho, r) with 2 parameters or\n%s',...
@@ -111,20 +106,30 @@ If the method is not called the default values specified in the property definit
 	    end
 	    if nargin == 1
 		obj.rho = 1.1839;
-		obj.rF = 1;
+		obj.R = 1;
 	    else
 		obj.rho = rho;
-		obj.rF = rF;
+		obj.R = R;
 	    end
 	end
     end
 end
 \end{minted}
 
+\FloatBarrier
 
-\begin{minted}[linenos, breaklines, bgcolor=lightgray]{matlab}
-k = DriveUnit();
-% setParameters(Qts, Bl, Rms, Mms, Cms, Sd, Re, Rnom, fS)
-k.setParameters(0.397, 8.2, 1.3036, 14.7e-3, 0.821e-3, 119, 7.2, 8, 45);
-k.plotResponse(logspace(0,4,1000));
-\end{minted}
+\begin{figure}
+	\centering
+	\includegraphics[width=.7\linewidth,, clip, trim={3.6cm 8.4cm 4.1cm 9cm}]{gfx/Simulation/DriveUnitSimulation}
+	\caption{Simulated output of the FW168 Fountek drive unit.}
+	\label{fig:simdriveunit}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=.7\linewidth,, clip, trim={3.6cm 8.4cm 4.1cm 9cm}]{gfx/Simulation/CabinetSimulation}
+	\caption{Simulated output of the FW168 Fountek drive unit placed in a cabinet.}
+	\label{fig:simcabinet}
+\end{figure}
+
+\FloatBarrier
