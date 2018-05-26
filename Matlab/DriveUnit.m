@@ -29,7 +29,7 @@ classdef DriveUnit < TransferFunctions
           % L = TRANSFORM(f) Returns the sound pressure.
           setDerivedParameters(obj);
           % p = rho*Sd*Bl*UG/2*pi*Mms*Re
-          %%%%%% EVT. RET TIL BUNDEN AF SIDE 51
+          
           A = (obj.rho * obj.Sd * obj.Bl * obj.UG) / (2 * pi * obj.Mms * obj.Re);
           wS = 2 * pi * obj.fs;
           s = 1i .* 2 .* pi .* f;
@@ -52,17 +52,12 @@ classdef DriveUnit < TransferFunctions
           % Re   DC resistance of the voice coil (ohm)
           % Rnom Nominel resistance of drive unit (ohm)
           % fs   Resonance frequency of the drive unit (Hz)
-          if (Qts > 0) && (Qts < 1)
-              obj.Qts = Qts;
-          else 
-              warning('Qts must be a value between 0 and 1')
-          end
-          
           if  (Sd > 1) && (Sd < 1000)
               obj.Sd = Sd/1000;
           else
               warning('Sd is specified in cm^2')
           end
+          obj.Qts = Qts;
           obj.Bl = Bl;
           obj.Rms = Rms;
           obj.Mms = Mms;

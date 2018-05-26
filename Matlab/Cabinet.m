@@ -9,7 +9,7 @@ classdef Cabinet < TransferFunctions
     R = 1
     
     %% Box parameters
-    % Box volume (L)
+    % Box volume (m^3)
     volume
     % Any bass reflexes
     bassReflex
@@ -54,7 +54,7 @@ classdef Cabinet < TransferFunctions
         narginchk(1, 1);
         obj.volume = volume;
       catch
-        warning('Cabinet created without volume. Volume set to 1.');
+        warning('Cabinet created without volume. Volume set to 1 m^3.');
         obj.volume = 1;
       end
     end
