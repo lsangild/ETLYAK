@@ -47,6 +47,17 @@ The physical parameters of the drive unit can be found in the datasheet.
 \section{Transfer Functions}
 The loudspeaker being modelled in this project has been parted in 4 subsystems; a drive unit, a cross-over filter, a cabinet and a bass reflex. 
 Each subsystem have a transfer function that can be derived from the Thiele/Small parameters.
+
+\subsection{Cabinet}
+The transfer function for a drive unit placed in an enclosure is shown in \cref{eq:dutfclosed}.
+
+\begin{equation}
+p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}\left(1+\frac{C_{MS}{S_D}^2}{C_{AB}}\right)}
+\label{eq:dutfclosed}
+\end{equation}
+
+
+
 \subsection{Drive Unit}
 \label{seq:driveunit}
 The drive unit can be modelled as mounted in an infinite baffle, separating the front and back side of the diaphragm, thus avoiding acoustic short circuiting. 
@@ -63,26 +74,26 @@ In this project the drive unit is being modelled as mounted in an infinite enclo
 Placing the drive unit in enclosure will prevent acoustic short circuiting as well. 
 The volume of the closed cabinet is characterized by the air acting like a spring (a capacity) which affects the drive unit's compliance.  
 If the drive unit is placed in a very large sealed enclosure it will make the model behave like the drive unit was mounted in an infinite baffle.  
-The transfer function for a drive unit placed in an enclosure is shown in \cref{eq:dutfclosed}.
-
-\begin{equation}
-p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}\left(1+\frac{C_{MS}{S_D}^2}{C_{AB}}\right)}
-\label{eq:dutfclosed}
-\end{equation}
-
-When the volume becomes very large the compliance as well becomes very large, \cref{eq:cab}. 
-In stead of change the volume of the closed cabinet it is possible to change the compliance, $C_{AB}$ in \cref{eq:dutfclosed}. 
 
 \begin{equation}
 C_{AB} = \frac{V_B}{\rho \,c^2}
 \label{eq:cab}
 \end{equation} 
 
-The constant term in \cref{eq:dutfinfinite} transforms the voltage $U_G$ to the sound pressure $p$ while the complex term represent a second order high pass filter.
+When the volume becomes very large the compliance as well becomes very large, \cref{eq:cab}. 
+The term containing the $C_{AB}$ variable can be left out of \cref{eq:dutfclosed} and the transfer function for a drive unit placed in an very large enclosure is now as shown in \cref{eq:dutfclosedvolume}.
+
+\begin{align}
+	p_\infty &= \lim_{C_{AB}\rightarrow\infty}\left(p\right) \\
+	\Rightarrow p_\infty &= \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}}
+	\label{eq:dutfclosedvolume}
+\end{align}
+
+The constant term in \cref{eq:dutfclosedvolume} transforms the voltage $U_G$ to the sound pressure $p$ while the complex term represent a second order high pass filter.
 The transfer function of the drive unit is shown in \cref{eq:dutfderived}.
 
 \begin{equation}
-H = k\,\dfrac{s^2}{s^2+\frac{\omega_s}{Q_{TS}}+\omega_s^2}
+H = k_0\,\dfrac{s^2}{s^2+k_1\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}+\frac{1}{M_{MS}C_{MS}}}
 \label{eq:dutfderived}
 \end{equation}
 \fxnote{Skal være lukket kabinet tf}
