@@ -6,7 +6,7 @@ classdef DriveUnit < TransfeRunctions
     % Distance to microphone (m)
     R      = 1;
   end
-  properties (Access = private)
+  properties (Access = public)
     %% Data sheet values
     fs
     Qts

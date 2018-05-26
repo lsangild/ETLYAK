@@ -1,12 +1,12 @@
 classdef Cabinet < TransferFunctions
   properties (Access = private)
     %% Defaults
-    % Speed of sound (m/s) (default for 25 °C)
+    % Speed of sound (m/s) (default for 25 ??C)
     c = 346.13;
-    % Density of air (kg/m^3) (default for 25 °C)
+    % Density of air (kg/m^3) (default for 25 ??C)
     rho = 1.1839;
     % Distance to microphone (m)
-    R = 1
+    R = 1;
     
     %% Box parameters
     % Box volume (m^3)
@@ -32,8 +32,12 @@ classdef Cabinet < TransferFunctions
     function pF = transform(obj, f)
         setDerivedParameters(obj);
         s = 1i .* 2 .* pi .* f;
-        qF = obj.FA ./ (obj.RAE + s .* obj.MAS + 1 ./ (s .* obj.CAS) + obj.RAS + 1 ./ (s .* obj.CAB));
-        pF = obj.rho .* s .* qF ./ (2 * pi * obj.R);
+        k0 = (obj.rho / (2 * pi * obj.R)) * ((obj.driveUnit.Bl * obj.driveUnit.Sd * obj.driveUnit.UG) / (obj.driveUnit.Re * obj.driveUnit.Mms));
+        k1 = (obj.driveUnit.Bl^2 / (obj.driveUnit.Re * obj.driveUnit.Mms)) + obj.driveUnit.Rms / obj.driveUnit.Mms;
+        k2 = (1 / (obj.driveUnit.Mms * obj.driveUnit.Cms)) * (1 + ((obj.driveUnit.Cms * obj.driveUnit.Sd^2) / obj.CAB));
+        pF = k0 .* (s.^2 ./ (s.^2 + s .* k1 + k2));
+        %qF = obj.FA ./ (obj.RAE + s .* obj.MAS + 1 ./ (s .* obj.CAS) + obj.RAS + 1 ./ (s .* obj.CAB));
+        %pF = obj.rho .* s .* qF ./ (2 * pi * obj.R);
     end
     
     % Sets the derived parameters dependent on the given Drive Unit
