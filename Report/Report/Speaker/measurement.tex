@@ -33,6 +33,7 @@ Three measurements were made with the see-through speaker; closed box, bottom-ho
 \end{figure}
 
 Comparing the closed box approach of both speakers, \cref{fig:closedcompare}, they differ mostly in the regions \SIrange{50}{100}{\hertz} and \SIrange{400}{10000}{\hertz}.
+This is most likely due to different Thiele/Small parameters.
 
 \begin{figure}
 	\centering
@@ -41,7 +42,9 @@ Comparing the closed box approach of both speakers, \cref{fig:closedcompare}, th
 	\label{fig:closedcompare}
 \end{figure}
 
-When comparing the see-through speaker setups, \cref{fig:PGcompareAll}, the responses are very similar, except for in the range \SIrange{50}{150}{\hertz}, \cref{fig:PGcompareZoom}. \fxnote{Is the resonant frequency in this range?}
+When comparing the see-through speaker setups, \cref{fig:PGcompareAll}, the responses are very similar, except for in the range \SIrange{50}{150}{\hertz}, \cref{fig:PGcompareZoom}.
+This is the range at which the response goes from a slope of \SI{12}{\decibel}/octave for the closed setup, and \SI{24}{\decibel}/octave for the open and bass reflex setups, to a more linear frequency response.
+Here the gain from using a bass reflex gives approximately \SIrange{3}{5}{\decibel} in the range \SIrange{60}{90}{\hertz}.
 
 \begin{figure}
 	\centering
@@ -60,3 +63,5 @@ When comparing the see-through speaker setups, \cref{fig:PGcompareAll}, the resp
 	\caption{Comparison of the different setups of the see-through speaker.}
 	\label{fig:PGcompare}
 \end{figure}
+
+\FloatBarrier

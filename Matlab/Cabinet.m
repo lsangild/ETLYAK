@@ -18,13 +18,7 @@ classdef Cabinet < TransferFunctions
     driveUnit
     
     % Derived parameters
-    FA
     CAB
-    RAE
-    MAS
-    CAS
-    RAS
-    RAL
   end
   
   methods (Access = public)
@@ -42,12 +36,7 @@ classdef Cabinet < TransferFunctions
     
     % Sets the derived parameters dependent on the given Drive Unit
     function setDerivedParameters(obj)
-      obj.FA  = (obj.driveUnit.Bl * obj.driveUnit.UG) / (obj.driveUnit.Re * obj.driveUnit.Sd);
       obj.CAB = obj.volume / (obj.rho * obj.c.^2);
-      obj.RAE = obj.driveUnit.Bl.^2 / (obj.driveUnit.Re * obj.driveUnit.Sd.^2);
-      obj.MAS = obj.driveUnit.Mms / (obj.driveUnit.Sd.^2);
-      obj.CAS = obj.driveUnit.Cms * (obj.driveUnit.Sd.^2);
-      obj.RAS = obj.driveUnit.Rms / (obj.driveUnit.Sd.^2);
     end
   end
   
