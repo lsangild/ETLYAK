@@ -4,6 +4,7 @@ load Measurements.mat
 Y0 = fft(PG_closed);
 Y1 = fft(PG_hole_bot);
 Y2 = fft(PG_BR_bot);
+%Y1 = fft(PK_closed);
 
 % To dB_SPL
 Y0 = 20*log10(Y0./20e-6);
@@ -18,5 +19,6 @@ semilogx(f(1:end/2), abs(Y2(1:end/2)))
 grid on
 xlabel('Frequency (Hz)');
 ylabel('dB_{SPL}');
-xlim([10, 600]);
+xlim([30, 200]);
+%ylim([40, 120]);
 legend('Closed', 'Hole bot', 'BR bot', "location", "southeast");
