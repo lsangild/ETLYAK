@@ -1,4 +1,4 @@
-classdef DriveUnit < TransfeRunctions
+classdef DriveUnit < TransferFunctions
   properties (Access = private)
     %% Defaults
     % Density of air (kg/m^3)
@@ -33,7 +33,7 @@ classdef DriveUnit < TransfeRunctions
           k0 = (obj.rho * obj.Bl * obj.Sd * obj.UG) / (2 * pi * obj.R * obj.Re * obj.Mms);
           k1 = ((obj.Bl^2) / (obj.Re * obj.Mms)) + (obj.Rms / obj.Mms);
           k2 = 1 / (obj.Mms * obj.Cms);
-          p = k0 * (s.^2 / (s.^2 + s .* k1 + k2));
+          p = k0 .* (s.^2 ./ (s.^2 + s .* k1 + k2));
           
           %wS = 2 * pi * obj.fs;
           %AL = abs(s.^2 ./ (s.^2 + (1/obj.Qts) .* wS .* s + wS^2));
