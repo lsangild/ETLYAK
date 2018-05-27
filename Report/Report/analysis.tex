@@ -66,8 +66,6 @@ p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)
 \label{eq:dutfclosed}
 \end{equation}
 
-The constant term in \cref{eq:dutfclosed} transforms the voltage $U_G$ to the sound pressure $p$ while the complex term represent a second order high pass filter.
-
 \subsection{Drive Unit}
 \label{seq:driveunit}
 The drive unit can be modelled as mounted in an infinite baffle, which also separates the front and back side of the diaphragm.
@@ -78,6 +76,8 @@ The transfer function for a drive unit placed in an infinite baffle is shown in 
 	p =& \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\left|\frac{s^2}{s^2 + \frac{\omega_s}{Q_{TS}}s+\omega_s^2}\right| \label{eq:dutfinfinite} \\
 	& \left[1-\frac{r_F}{r_B}D(ka)\exp(-jk(r_B-r_F))\right] \left[1-\frac{r_F}{r_R}D(ka)\exp(-jk(r_R-r_F))\right]\notag
 \end{align}
+
+The constant term in \cref{eq:dutfinfinite} transforms the voltage $U_G$ to the sound pressure $p$ while the complex term represent a second order high pass filter.\\
 
 In this project the drive unit is being modelled as mounted in an infinite enclosure, a closed cabinet. Doing this will avoid the diffraction and reflection terms in \cref{eq:dutfinfinite}.
 Placing the drive unit in enclosure will prevent acoustic short circuiting as well.   
@@ -100,7 +100,7 @@ H_{T} = \frac{s^2}{\omega_0^2+2\zeta\,\omega_0 s+s^2}
 \label{eq:high}
 \end{equation}
 
-For a drive unit (woofer) reproducing the low frequency spectrum, a second order low pass filter is used to filter the high frequency spectrum, see \cref{eq:low}.
+\newpage For a drive unit (woofer) reproducing the low frequency spectrum, a second order low pass filter is used to filter the high frequency spectrum, see \cref{eq:low}.
 \begin{equation}
 H_{W} = \frac{\omega_0^2}{\omega_0^2+2\zeta\,\omega_0 s+s^2}
 \label{eq:low}
@@ -113,6 +113,23 @@ The sharper the transition band needs to be, the higher the Q-factor, given the 
 
 \subsection{Bass Reflex}
 \fxnote{s. 55 TAS}
+A bass reflex is a port placed in the cabinet, also called a vented cabinet.
+By creating a port, the pressure from the rear side of the diaphragm can increase the reproduction of low frequencies.
+The air in the port will resonate with the volume of the cabinet and this will introduce an additional resonance frequency. \cite[p.~53]{Elektroakustik}
+The transfer function for a drive unit placed in an infinite baffle is shown in \cref{eq:bassreflex}.
+
+\begin{equation}
+p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\,H_{BR}(s)
+\label{eq:bassreflex}
+\end{equation}
+
+The constant term in \cref{eq:bassreflex} transforms the voltage $U_G$ to the sound pressure $p$ while the $H_{BR}(s)$ represent a fourth order high pass filter and can be applied to low frequency spectra. \cite[p.~55]{Elektroakustik}
+
+\begin{equation}
+H_{BR}(s) = \frac{s^4}{s^4+a_3\omega_0s^3+a_2\omega_0^2s^2+a_1\omega_0^3s+\omega_0^4}
+\label{eq:brtf}
+\end{equation}
+
 \section{Frequency Response}
 The sound pressure is measured in \si{\decibel} SPL and is ratio of the measured sound pressure $p$ and the threshold of hearing $p_{ref}=\SI{20}{\micro\pascal}$, see \cref{eq:soundpressure}.
 

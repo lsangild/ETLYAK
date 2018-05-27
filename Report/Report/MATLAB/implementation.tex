@@ -116,8 +116,6 @@ If the method is not called the default values specified in the property definit
 end
 \end{minted}
 
-\FloatBarrier
- 
 An instance of the \mintinline{matlab}{DriveUnit} is created and the parameters of the Fountek FW168 drive unit is set with the method \mintinline{matlab}{setParameters()}.
 The method \mintinline{matlab}{plotResponse(logspace(1,4,1000))} from the \mintinline{matlab}{TransferFunctions} class plots the response between \SI{10}{\hertz} and \SI{10}{\kilo\hertz}.
 In \cref{fig:simdriveunit} the simulated frequency response of the Fountek FW168 drive unit placed in an infinite sealed enclosure is seen.
@@ -141,18 +139,20 @@ u.setDriveUnit(k);
 u.plotResponse(logspace(1,4,100));
 \end{minted}
 
-\begin{figure}
+%\FloatBarrier
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=.7\linewidth, clip, trim={3.6cm 8.6cm 4.1cm 10cm}]{gfx/Simulation/DriveUnitSimulation}
 	\caption{Simulated output of the FW168 Fountek drive unit.}
 	\label{fig:simdriveunit}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=.7\linewidth,, clip, trim={3.6cm 8.6cm 4.1cm 10cm}]{gfx/Simulation/CabinetSimulation}
 	\caption{Simulated output of the FW168 Fountek drive unit placed in a cabinet.}
 	\label{fig:simcabinet}
 \end{figure}
 
-\FloatBarrier
+%\FloatBarrier
