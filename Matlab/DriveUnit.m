@@ -52,7 +52,7 @@ classdef DriveUnit < TransferFunctions
           % Rnom Nominel resistance of drive unit (ohm)
           % fS   Resonance frequency of the drive unit (Hz)
           if  (Sd > 1) && (Sd < 1000)
-              obj.Sd = Sd/1000;
+              obj.Sd = Sd/10000;
           else
               warning('Sd is specified in cm^2')
           end

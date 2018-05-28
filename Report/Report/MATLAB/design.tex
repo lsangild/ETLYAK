@@ -27,7 +27,7 @@ The \mintinline{matlab}{plotResponse(f)} function plots the response of the driv
 
 \paragraph{The Cabinet class} describes a closed box cabinet, with the possibility to add a number of bass reflexes and check if their locations are valid.
 Without bass reflexes \mintinline{matlab}{plotResponse(f)} plots the response in a cabinet of the specified volume, according to \cref{eq:dutfclosed}.
-If bass reflexes are present, it should plot the frequency response according to \fxnote{Ref to eqs.}
+If bass reflexes are present, it should plot the frequency response according to \cref{eq:bassreflex}.
 
 \paragraph{The CrossoverFilter class} is meant to filter the input before it reaches the physical parts of the speaker.
 It is meant to either be used to filter the signal in an appropriate way if several drive units are installed, or to try to refine the signal, if the speaker response is not satisfactory.
