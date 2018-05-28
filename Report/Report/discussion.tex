@@ -1,11 +1,34 @@
 % !TEX root = ../main.tex
 % !TEX spellcheck = en_GB
 
-\chapter{Discussion}
+\chapter{Discussion \& Conclusion}
 \label{sec:discussion}
+
+The goal of this project has been to implement Matlab models of speaker parts in a modulized framework, allowing for easy investigations of speaker frequency responses.
+The models have been compared to measurements of two speakers in different configurations.
+
+The models implemented are useful for visualizing the effects of changing the Thiele/Small parameters and the volume of the cabinet.
+The framework has not implemented bass reflexes or the ability to filter an arbitrary signal using the Matlab \mintinline{matlab}{filter} function, though the basis for doing so is presented in \cref{chap:analysis}.
+
+The measurements, shown and compared in \cref{chap:measurement}, exhibit the behaviour expected.
+The fitting of a bass reflex into the cabinet, gives a higher output of lower frequencies, \cref{fig:PGcompareZoom}.
+The measurements where made with a linear chirp, which in hindsight did not give as much information in the low frequency area as desired.
+This could be remedied by using a logarithmic chirp in stead.
+
+Comparing the models and the measurements revealed that the models were able to predict the cut-off frequency of the speaker, and the slope of the high-pass filter.
+The amplitude of the models though, was approximately \SI{10}{\decibel} too low.
+
+On the basis of this we can conclude that the models can be useful for predicting cut-off frequency and slope of a speaker in a cabinet without bass reflexes.
+
 \begin{itemize}
 	\item Better measurements using log sweeps (spectrogram plot a chirp vs log chirp)
 	\item Investigation of weird sound at high volume when measuring. Maybe the missing peak from Cabinet plots?
 	\item How hard will it be to implement bass reflex?
 	\item Could the transfer functions be used for anything? Yes, see optimization of filters.
+\end{itemize}
+
+Conclusion
+\begin{itemize}
+	\item Is the model useful for testing Drive Units? Probably
+	\item Is the model useful for testing Cabinets? Maybe
 \end{itemize}
