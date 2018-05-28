@@ -17,11 +17,11 @@ It uses the implemented, by any subclass, \mintinline{matlab}{transform(x)} meth
 \paragraph{The Speaker class} contains the objects necessary to calculate the transfer function for the complete speaker.
 It's purpose is to collect the other units, to test them together, and to provide the frequency response to compare with the measured response.
 
-\paragraph{The DriveUnit class} describes the drive unit on the basis of Thiele/Small parameters\cite{thielesmall} and \cref{eq:transdriveunit} \cite[p.~41]{Elektroakustik}.
+\paragraph{The DriveUnit class} describes the drive unit on the basis of Thiele/Small parameters \cite{thielesmall} and \cref{eq:transdriveunit} \cite[p.~51]{Elektroakustik}.
 The \mintinline{matlab}{plotResponse(f)} function plots the response of the drive unit in an infinitely large closed box.
 
 \begin{equation}
-	p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\left|\frac{s^2}{s^2 + \frac{\omega_s}{Q_{TS}}s+\omega_s^2}\right|
+	p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)^2}{R_EM_{MS}}+\frac{R_{MS}}{M_{MS}}\right)+\frac{1}{M_{MS}C_{MS}}}
 	\label{eq:transdriveunit}
 \end{equation}
 

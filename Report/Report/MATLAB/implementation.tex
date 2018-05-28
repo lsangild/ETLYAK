@@ -6,10 +6,10 @@ The \mintinline{matlab}{DriveUnit} class is shown below for clarification.
 The overall structure is a standard Matlab class inheriting from TransferFunctions, as shown in \cref{fig:classbdd}. 
 Following are the private and public properties and the public methods, including the implementation of the \mintinline{matlab}{transform(f)} method.
 
-Matlab evaluates the property definition section only once and assigns the same value to the property of every instance in the class.\fxnote{https://se.mathworks.com/help/matlab/matlab\_oop/specifying-properties.html}
+Matlab evaluates the property definition section only once and assigns the same value to the property of every instance in the class. \cite{MatlabClasses}
 The default values are specified individually as private or public.
 The private properties include constants so these properties gets a default value that other instances can not access. 
-Instead the datasheet values for the drive unit is public so other instances, e.g. \mintinline{matlab}{Cabinet}, can access these values.
+The datasheet values for the drive unit is public so other instances, e.g. \mintinline{matlab}{Cabinet}, can access these values.
 
 The implementations of all the classes in the MATLAB framework can be found in appendix \ref{app:code}. 
 
@@ -39,7 +39,7 @@ classdef DriveUnit < TransferFunctions
     end
 \end{minted}
 
-The methods are public so \mintinline{matlab}{TransferFunctions} can access the \mintinline{matlab}{transform(f)} method to plot the frequency response of the drive unit. See appendix in \cref{app:code} for implemtation of \mintinline{matlab}{TransferFunctions}.
+The methods are public so \mintinline{matlab}{TransferFunctions} can access the \mintinline{matlab}{transform(f)} method to plot the frequency response of the drive unit. See appendix \ref{app:code} for implemtation of \mintinline{matlab}{TransferFunctions}.
 The implementation of the \mintinline{matlab}{transform(f)} method create the transfer function for a drive unit using the properties specified.
 The transfer function for a drive unit can be found in \cref{seq:driveunit}, \cref{eq:dutfclosed}.
 
@@ -129,7 +129,7 @@ k.plotResponse(logspace(1,4,1000));
 An instance of the \mintinline{matlab}{Cabinet} is created with the volume of the cabinet as an argument.
 The Fountek FW168 drive unit is set with the method \mintinline{matlab}{setDriveUnit()}.
 The method \mintinline{matlab}{plotResponse(logspace(1,4,1000))} from the \mintinline{matlab}{TransferFunctions} class plots the response between \SI{10}{\hertz} and \SI{10}{\kilo\hertz}.
-In \cref{fig:simcabinet} the simulated frequency response of the Fountek FW168 drive unit placed in an cabinet with a volume of \SI{17.9}{\liter} is seen. 
+In \cref{fig:simcabinet} the simulated frequency response of the Fountek FW168 drive unit placed in an cabinet with a volume of \SI{17.9}{\litre} is seen. 
 
 \begin{minted}[linenos, breaklines, bgcolor=lightgray]{matlab}
 % 26.8cm x 20.2cm x 33.0cm
