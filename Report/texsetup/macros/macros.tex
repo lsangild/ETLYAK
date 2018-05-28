@@ -1,2 +1,7 @@
 % Generic macros.
 \subimport*{./}{generic.tex}
+
+\newcommand{\hiddensection}[1]{
+	\stepcounter{section}
+	\subsection*{\Alph{chapter}.\arabic{section}\hspace{1em}{#1}}
+}
