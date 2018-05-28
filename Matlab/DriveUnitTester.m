@@ -11,7 +11,7 @@ H = k.plotResponse(logspace(1,4,1000));
 %%
 % 26.8cm x 20.2cm x 33.0cm
 V = (26.8e-2*20.2e-2*33.0e-2);
-%V = 1.5e-4;
+%V = 1.5e-3;
 
 u = Cabinet(V);
 u.setDriveUnit(k);
@@ -25,4 +25,4 @@ xlim([10, 10e3]);
 ylim([40, 120]);
 
 legend('Drive Unit Model', 'Cabinet Model', 'Measurement', 'location', 'southeast');
-title('See-through speaker');
+title('See-through');
