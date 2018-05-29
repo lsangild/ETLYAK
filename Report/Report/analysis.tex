@@ -51,8 +51,8 @@ Each subsystem have a transfer function that can be derived from the Thiele/Smal
 
 \subsection{Cabinet}
 The cabinet is a sealed enclosure, which separates the front and back side of the diaphragm, thus avoiding acoustic short circuiting. 
-Placing a drive unit in a sealed enclosure prevents the pressure at the front and back to eliminate each other. \cite[p.~44]{Elektroakustik}  
-The volume of the closed cabinet is characterized by the air acting like a spring (a capacity) which affects the drive unit's compliance, see \cref{eq:cab}. 
+Placing a drive unit in a sealed enclosure prevents the pressure at the front and back to interact with each other. \cite[p.~44]{Elektroakustik}.
+The volume of the closed cabinet is characterized by the air acting like a spring (a capacity) which affects the drive unit's compliance, see \cref{eq:cab}, where $V_B$ is the volume of the cabinet, $\rho$ is the density of air and $c$ is the speed of sound.
 
 \begin{equation}
 C_{AB} = \frac{V_B}{\rho \,c^2}
@@ -72,7 +72,6 @@ p = \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\frac{s^2}{s^2 +s \left(\frac{(Bl)
 The drive unit can be modelled as mounted in an infinite baffle, which also separates the front and back side of the diaphragm.
 The transfer function for a drive unit placed in an infinite baffle is shown in \cref{eq:dutfinfinite}. This equation contains the diffraction and reflection seen in the two last terms.
 
-
 \begin{align}
 	p =& \frac{\rho S_D B l U_G}{2\pi r M_{MS} R_E}\left|\frac{s^2}{s^2 + \frac{\omega_s}{Q_{TS}}s+\omega_s^2}\right| \label{eq:dutfinfinite} \\
 	& \left[1-\frac{r_F}{r_B}D(ka)\exp(-jk(r_B-r_F))\right] \left[1-\frac{r_F}{r_R}D(ka)\exp(-jk(r_R-r_F))\right]\notag
@@ -85,7 +84,7 @@ In this project the drive unit is being modelled as mounted in an infinite enclo
 Placing the drive unit in enclosure will prevent acoustic short circuiting as well.   
 If the drive unit is placed in a very large sealed enclosure it will make the model behave like the drive unit was mounted in an infinite baffle.  
 When the volume becomes very large the compliance as well becomes very large seen in \cref{eq:cab}. 
-The term containing the $C_{AB}$ variable can be left out of \cref{eq:dutfclosed} and the transfer function for a drive unit placed in an very large enclosure is now as shown in \cref{eq:dutfclosedvolume}.
+The term containing the $C_{AB}$ variable goes towards zero as $C_{AB}\rightarrow\infty$ in \cref{eq:dutfclosed} and the transfer function for a drive unit placed in an very large enclosure is now as shown in \cref{eq:dutfclosedvolume}.
 
 \begin{align}
 	p_\infty &= \lim_{C_{AB}\rightarrow\infty}\left(p\right) \\
@@ -96,7 +95,7 @@ The term containing the $C_{AB}$ variable can be left out of \cref{eq:dutfclosed
 \subsection{Crossover Filter}
 Different drive units are differently designed to reproduce the sound in specific frequency spectra.
 When a loudspeaker system consist of multiple drive units a crossover filter is used to separate these frequency spectrums.
-For a drive unit (tweeter) reproducing the high frequency spectrum, a second order high pass filter is used to filter the low frequency spectrum, see eq. \ref{eq:high}. \cite[p.~82-83]{Elektroakustik}
+For a drive unit (tweeter) reproducing the high frequency spectrum, a second order high pass filter is used to filter the low frequency spectrum, see eq. \ref{eq:high} \cite[p.~82-83]{Elektroakustik}.
 \begin{equation}
 H_{T} = \frac{s^2}{\omega_0^2+2\zeta\,\omega_0 s+s^2}
 \label{eq:high}
@@ -116,7 +115,7 @@ The sharper the transition band needs to be, the higher the Q-factor, given the 
 \subsection{Bass Reflex}
 A bass reflex is a port placed in the cabinet, also called a vented cabinet.
 By creating a port, the pressure from the rear side of the diaphragm can increase the low frequency spectrum.
-The air in the port will resonate with the volume of the cabinet and this will introduce an additional resonance frequency. \cite[p.~53]{Elektroakustik}
+The air in the port will resonate with the volume of the cabinet and this will introduce an additional resonance frequency \cite[p.~53]{Elektroakustik}.
 The transfer function for a drive unit placed in a vented cabinet is shown in \cref{eq:bassreflex}.
 
 \begin{equation}
@@ -131,7 +130,7 @@ H_{BR}(s) = \frac{s^4}{s^4+a_3\omega_0s^3+a_2\omega_0^2s^2+a_1\omega_0^3s+\omega
 \label{eq:brtf}
 \end{equation}
 
-The parameters $a_1$, $a_2$ and $a_3$ in \cref{eq:brtf} can be defined according to the Thiele/Small parameters to output the desired frequency response. \cite[p.~55]{Elektroakustik}
+The parameters $a_1$, $a_2$ and $a_3$ in \cref{eq:brtf} can be defined according to the Thiele/Small parameters to output the desired frequency response  \cite[p.~55]{Elektroakustik}.
 
 \section{Frequency Response}
 The sound pressure is measured in \si{\decibel} SPL and is a ratio of the sound pressure $p$ and the threshold of hearing $p_{ref}=\SI{20}{\micro\pascal}$, see \cref{eq:soundpressure}.
@@ -141,8 +140,6 @@ L=20\log_{10}\left(\frac{p}{p_{ref}}\right)
 \label{eq:soundpressure}
 \end{equation}
 
-The transfer functions applies in an area between the drive unit's resonance frequency $f_S$ and approx. the frequency $f_1\approx\frac{c}{2\pi a}$ where $a$ is the radius of the drive unit's baffle and $c$ is the velocity of sound. \cite[p.~41]{Elektroakustik}
-
-
+The transfer functions applies in an area between the drive unit's resonance frequency $f_s$ and approximately the frequency $f_1\approx\frac{c}{2\pi a}$ where $a$ is the radius of the drive unit's baffle and $c$ is the velocity of sound \cite[p.~41]{Elektroakustik}.
 
 \FloatBarrier

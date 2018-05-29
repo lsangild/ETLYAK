@@ -4,8 +4,8 @@
 The design of the MATLAB framework is shown in \cref{fig:classbdd}.
 
 \paragraph{The TransferFunction class} implements the \mintinline{matlab}{plotResponse(f)} method, and the  abstract method \mintinline{matlab}{transform(x)}.
-\mintinline{matlab}{plotResponse(f)} plots the amplitude spectrum in the range given by the argument \mintinline{matlab}{f}.
-It uses the implemented, by any subclass, \mintinline{matlab}{transform(x)} method to access the frequency response.
+\mintinline{matlab}{plotResponse(f)} plots the amplitude spectrum for the frequency values given by the argument \mintinline{matlab}{f}.
+It uses the, implemented by any subclass, \mintinline{matlab}{transform(x)} method to access the frequency response.
 
 \begin{figure}
 	\centering
